@@ -1,0 +1,340 @@
+/* Enhanced 3D Styles */
+:root {
+  --primary-color: #7b0041;
+  --secondary-color: #f5f0e6;
+  --accent-color: #f8d57e;
+  --text-color: #333;
+  --shadow-color: rgba(123, 0, 65, 0.2);
+  --glow-color: rgba(245, 240, 230, 0.8);
+}
+
+/* 3D Text Effect */
+.text-3d {
+  text-shadow:
+    0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25); /* Slightly simplified */
+  color: var(--primary-color);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+.text-3d:hover {
+  transform: translateY(-3px) scale(1.02); /* Subtle hover */
+   text-shadow:
+    0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 7px 2px rgba(0,0,0,.1), /* Slightly increased shadow on hover */
+    0 0 8px rgba(0,0,0,.1),
+    0 1px 4px rgba(0,0,0,.3),
+    0 4px 7px rgba(0,0,0,.2),
+    0 6px 12px rgba(0,0,0,.25);
+}
+
+
+/* 3D Card Effect */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.08),
+    0 8px 20px rgba(0,0,0,0.04);
+}
+/* Hover effect handled by JS for dynamic rotation */
+
+
+/* 3D Button Effect */
+.btn-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 3px 5px rgba(0,0,0,0.1),
+    0 1px 2px rgba(0,0,0,0.08);
+  transform: translateZ(0); /* Base state */
+}
+.btn-3d:hover {
+  transform: translateY(-2px) translateZ(5px); /* Less extreme */
+  box-shadow:
+    0 5px 10px rgba(0,0,0,0.12),
+    0 2px 4px rgba(0,0,0,0.1);
+}
+.btn-3d:active {
+  transform: translateY(1px) translateZ(0); /* Push down effect */
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.1),
+    0 0 1px rgba(0,0,0,0.08);
+}
+
+
+/* 3D Image Effect */
+.image-3d-container {
+  perspective: 1000px;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  display: block; /* Ensure container behaves correctly */
+}
+.image-3d {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform; /* Performance hint */
+}
+/* Hover effect handled by JS for dynamic rotation */
+
+
+/* 3D Counter Effect */
+.counter-3d {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.05),
+    0 2px 3px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  display: inline-block; /* Needed for transform */
+}
+.counter-3d.counted {
+  transform: translateZ(5px) scale(1.05); /* Subtle pop */
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.08),
+    0 4px 6px rgba(0,0,0,0.08);
+}
+
+
+/* 3D Timeline Effect - Visibility animation */
+.timeline-item-interactive {
+  opacity: 0;
+  transform: translateX(30px); /* Animate from right for RTL */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform; /* Performance hint */
+}
+.timeline-item-interactive.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* 3D Cube */
+.cube-container {
+  width: 180px; /* Slightly smaller */
+  height: 180px;
+  perspective: 1200px; /* Increase perspective */
+  margin: 1rem auto; /* Add some margin */
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-10deg) rotateY(20deg); /* Adjust initial angle */
+  animation: cube-rotate 25s infinite linear; /* Slower rotation */
+  will-change: transform;
+}
+
+.cube-face {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6); /* More transparent */
+  border: 1px solid rgba(123, 0, 65, 0.3); /* Softer border */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
+  color: var(--primary-color);
+  backface-visibility: hidden; /* Hide back faces */
+}
+.cube-face i {
+    font-size: 2.5rem; /* Adjust icon size */
+}
+
+.cube-face-front { transform: translateZ(90px); }
+.cube-face-back { transform: rotateY(180deg) translateZ(90px); }
+.cube-face-right { transform: rotateY(90deg) translateZ(90px); }
+.cube-face-left { transform: rotateY(-90deg) translateZ(90px); }
+.cube-face-top { transform: rotateX(90deg) translateZ(90px); }
+.cube-face-bottom { transform: rotateX(-90deg) translateZ(90px); }
+
+@keyframes cube-rotate {
+  0% { transform: rotateX(-10deg) rotateY(0deg); }
+  100% { transform: rotateX(-10deg) rotateY(360deg); }
+}
+
+
+/* Floating Elements */
+.floating-element {
+  position: absolute;
+  width: 20px; height: 20px; /* Even smaller */
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.15; /* Even less visible */
+  pointer-events: none;
+  z-index: 0; /* Ensure behind content */
+  animation: float 15s ease-in-out infinite alternate; /* Slower, alternate */
+  will-change: transform;
+}
+/* SVGs embedded directly for reliability */
+.floating-element.solar-panel { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237b0041"><path d="M4,2H20A2,2 0 0,1 22,4V14A2,2 0 0,1 20,16H4A2,2 0 0,1 2,14V4A2,2 0 0,1 4,2M4,4V8H20V4H4M4,10V14H20V10H4M12,17L6.5,20L8,15L3,11L8,11L12,6L16,11L21,11L16,15L17.5,20L12,17Z"/></svg>'); }
+.floating-element.windmill { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237b0041"><path d="M12,21C11.72,21 11.46,20.82 11.34,20.55L10.33,18.43C10.11,18.43 9.89,18.4 9.68,18.34L7.6,19.43C7.36,19.57 7.04,19.54 6.83,19.33C6.62,19.13 6.58,18.81 6.73,18.57L7.84,16.5C7.79,16.29 7.76,16.08 7.76,15.87L5.67,14.88C5.4,14.77 5.22,14.5 5.22,14.22C5.22,13.93 5.4,13.67 5.67,13.56L7.76,12.57C7.76,12.36 7.79,12.15 7.84,11.94L6.73,9.87C6.58,9.63 6.62,9.31 6.83,9.11C7.04,8.9 7.36,8.87 7.6,9L9.68,10.1C9.89,10.04 10.11,10 10.33,10L11.34,7.89C11.46,7.62 11.72,7.44 12,7.44C12.28,7.44 12.54,7.62 12.66,7.89L13.67,10C13.89,10 14.11,10.04 14.32,10.1L16.4,9C16.64,8.87 16.96,8.9 17.17,9.11C17.38,9.31 17.42,9.63 17.27,9.87L16.16,11.94C16.21,12.15 16.24,12.36 16.24,12.57L18.33,13.56C18.6,13.67 18.78,13.93 18.78,14.22C18.78,14.5 18.6,14.77 18.33,14.88L16.24,15.87C16.24,16.08 16.21,16.29 16.16,16.5L17.27,18.57C17.42,18.81 17.38,19.13 17.17,19.33C16.96,19.54 16.64,19.57 16.4,19.43L14.32,18.34C14.11,18.4 13.89,18.43 13.67,18.43L12.66,20.55C12.54,20.82 12.28,21 12,21M10.5,16.23C11.14,16.5 11.86,16.5 12.5,16.23C13.14,15.96 13.64,15.45 13.92,14.79C14.19,14.14 14.19,13.39 13.92,12.74C13.64,12.08 13.14,11.58 12.5,11.3C11.86,11.03 11.14,11.03 10.5,11.3C9.86,11.58 9.36,12.08 9.08,12.74C8.81,13.39 8.81,14.14 9.08,14.79C9.36,15.45 9.86,15.96 10.5,16.23M12,13.38A0.89,0.89 0 0,1 12.89,14.27A0.89,0.89 0 0,1 12,15.16A0.89,0.89 0 0,1 11.11,14.27A0.89,0.89 0 0,1 12,13.38Z"/></svg>'); }
+.floating-element.sun { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237b0041"><path d="M3.55,18.54L4.96,19.95L6.76,18.16L5.34,16.74M11,22.45C11.32,22.45 13,22.45 13,22.45V19.5H11M12,5.5A6,6 0 0,0 6,11.5A6,6 0 0,0 12,17.5A6,6 0 0,0 18,11.5C18,8.18 15.31,5.5 12,5.5M20,12.5H23V10.5H20M17.24,18.16L19.04,19.95L20.45,18.54L18.66,16.74M20.45,4.46L19.04,3.05L17.24,4.84L18.66,6.26M13,0.55V3.5H11V0.55M4,10.5H1V12.5H4M6.76,4.84L4.96,3.05L3.55,4.46L5.34,6.26L6.76,4.84Z"/></svg>'); }
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-15px) rotate(8deg) scale(1.05); } /* Reduced movement */
+  100% { transform: translateY(0px) rotate(-5deg) scale(1); }
+}
+
+
+/* Parallax Effect */
+.parallax-container {
+  position: relative;
+  width: 100%;
+  min-height: 350px; /* Ensure minimum height */
+  overflow: hidden;
+  transform-style: preserve-3d;
+  border-radius: var(--border-radius); /* Apply border radius */
+}
+
+.parallax-layer {
+  position: absolute;
+  top: -10%; left: -10%; /* Slightly larger to avoid edges */
+  width: 120%; height: 120%;
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear; /* Faster, smoother transition */
+  will-change: transform;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Simplified parallax backgrounds - using pseudo elements */
+.parallax-layer-back::before,
+.parallax-layer-mid::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; /* Scale background nicely */
+    opacity: 0.15; /* Softer opacity */
+}
+.parallax-layer-back::before {
+    /* Example background - replace with subtle pattern or gradient */
+    background-image: radial-gradient(circle, var(--accent-color) 10%, transparent 70%);
+    opacity: 0.1; /* Further reduced opacity */
+}
+.parallax-layer-mid::before {
+     /* Example background */
+     background-image: linear-gradient(45deg, rgba(123, 0, 65, 0.1) 25%, transparent 25%, transparent 75%, rgba(123, 0, 65, 0.1) 75%), linear-gradient(45deg, rgba(123, 0, 65, 0.1) 25%, transparent 25%, transparent 75%, rgba(123, 0, 65, 0.1) 75%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    opacity: 0.1; /* Further reduced opacity */
+}
+
+
+/* Actual image layer */
+.parallax-layer-front {
+  /* Contains the main <img> */
+  top: 0; left: 0; width: 100%; height: 100%; /* Reset size */
+}
+/* JS handles the transform */
+
+
+/* Scroll Animations (applied via JS) */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(25px); /* Smaller initial offset */
+  transition: opacity 0.7s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+  will-change: opacity, transform;
+}
+.scroll-animate.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Custom Cursor - Basic styles, hover handled by JS */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px; /* Smaller dot */
+  background-color: rgba(123, 0, 65, 0.4); /* More transparent */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001; /* Above everything */
+  transform: translate(-50%, -50%);
+  mix-blend-mode: normal; /* Keep normal blend mode */
+}
+.custom-cursor-outline {
+  position: fixed;
+  top: 0; left: 0;
+  width: 26px; height: 26px; /* Smaller outline */
+  border-width: 1px; /* Thinner border */
+  opacity: 0.5; /* More transparent */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+  will-change: width, height, transform;
+}
+.custom-cursor-outline.hover {
+    width: 38px; height: 38px; /* Smaller hover expansion */
+    background-color: rgba(123, 0, 65, 0.05); /* Very subtle hover bg */
+    opacity: 0.4;
+}
+
+
+/* Perspective Container for Hero */
+.perspective-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+  /* Disable intense 3D effects on smaller screens */
+  .card-3d:hover { transform: translateY(-5px); }
+  .image-3d-container:hover .image-3d { transform: translateZ(10px); }
+  .cube-container { width: 150px; height: 150px; }
+  .cube-face { width: 150px; height: 150px; }
+  .cube-face-front { transform: translateZ(75px); }
+  .cube-face-back { transform: rotateY(180deg) translateZ(75px); }
+  .cube-face-right { transform: rotateY(90deg) translateZ(75px); }
+  .cube-face-left { transform: rotateY(-90deg) translateZ(75px); }
+  .cube-face-top { transform: rotateX(90deg) translateZ(75px); }
+  .cube-face-bottom { transform: rotateX(-90deg) translateZ(75px); }
+  /* Custom cursor disabled via JS for touch */
+}
+
+@media (max-width: 576px) {
+  .text-3d {
+    text-shadow:
+      0 1px 0 #ccc,
+      0 2px 0 #c9c9c9,
+      0 3px 0 #bbb,
+      0 4px 1px rgba(0,0,0,.1); /* Simplified further */
+  }
+  .cube-container { width: 120px; height: 120px; }
+  .cube-face { width: 120px; height: 120px; }
+  .cube-face i { font-size: 2rem; }
+  .cube-face-front { transform: translateZ(60px); }
+  .cube-face-back { transform: rotateY(180deg) translateZ(60px); }
+  .cube-face-right { transform: rotateY(90deg) translateZ(60px); }
+  .cube-face-left { transform: rotateY(-90deg) translateZ(60px); }
+  .cube-face-top { transform: rotateX(90deg) translateZ(60px); }
+  .cube-face-bottom { transform: rotateX(-90deg) translateZ(60px); }
+}

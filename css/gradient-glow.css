@@ -1,0 +1,293 @@
+/* Gradient and Glowing Effects */
+:root {
+  --primary-color: #7b0041;
+  --secondary-color: #f5f0e6;
+  --accent-color: #f8d57e;
+  --text-color: #333;
+  --shadow-color: rgba(123, 0, 65, 0.2);
+  --glow-color: rgba(248, 213, 126, 0.5); /* More subtle glow */
+}
+
+/* Blurred Glowing Background */
+.glowing-bg {
+  position: relative;
+  overflow: hidden; /* Important */
+  background-color: var(--secondary-color);
+}
+.glowing-bg::before {
+  content: '';
+  position: fixed; /* Fixed position */
+  top: -50%; left: -50%;
+  width: 200vw; height: 200vh; /* Use viewport units */
+  background: radial-gradient(
+    circle at center,
+    rgba(248, 213, 126, 0.15) 0%, /* Further reduced opacity */
+    rgba(245, 240, 230, 0.25) 40%, /* Adjusted stops */
+    rgba(245, 240, 230, 0.0) 70%
+  );
+  filter: blur(60px); /* Slightly more blur */
+  z-index: -2; /* Behind particle container */
+  animation: glow-rotate 45s linear infinite; /* Slower animation */
+  transform-origin: center center;
+}
+
+@keyframes glow-rotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-color), #a30057);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Removed text-shadow for better performance with complex backgrounds */
+  transition: background-position 0.5s ease;
+  background-size: 200% auto; /* For hover effect */
+  background-position: 0% center; /* Initial position */
+}
+.gradient-text:hover {
+  background-position: 100% center; /* Shift gradient on hover */
+}
+
+
+/* Gradient Buttons */
+.btn-gradient {
+  background: linear-gradient(135deg, var(--primary-color), #a30057);
+  border: none;
+  color: white;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(123, 0, 65, 0.2);
+}
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; /* Start hidden left */
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0)); /* Shine effect */
+  z-index: 1; /* Above base background */
+  transform: skewX(-25deg); /* Angle the shine */
+  transition: left 0.5s ease;
+}
+.btn-gradient:hover::before {
+  left: 100%; /* Move shine across */
+}
+.btn-gradient:hover {
+  box-shadow: 0 6px 20px rgba(123, 0, 65, 0.3);
+  transform: translateY(-2px);
+}
+
+
+/* Glass Morphism Effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.3); /* Increased opacity (from 0.25) */
+  backdrop-filter: blur(10px) saturate(140%); /* Adjusted blur/saturation */
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Slightly adjusted border */
+  box-shadow: 0 8px 32px rgba(123, 0, 65, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.4); /* Increase hover opacity */
+  box-shadow: 0 10px 35px rgba(123, 0, 65, 0.15);
+  /* Removed transform hover effect to avoid conflict with card-3d */
+}
+/* Ensure proper stacking context */
+.logo-bar.glass-card, nav.glass-card, footer.glass-card {
+    position: relative;
+    z-index: 10; /* Ensure above background effects */
+}
+
+/* Glowing Border for Progress */
+.glow-border {
+  position: relative;
+  border-radius: 5px; /* Match progress bar radius */
+  overflow: hidden;
+  padding: 1px; /* Padding to contain the glow */
+  z-index: 0;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg,
+    var(--primary-color),
+    var(--accent-color),
+    #ff8a00, /* Add another color */
+    var(--accent-color),
+    var(--primary-color)
+  );
+  z-index: -1;
+  border-radius: 6px; /* Slightly larger radius */
+  background-size: 300% 100%; /* Adjust size */
+  animation: glowing-border-progress 8s linear infinite; /* Faster animation */
+  filter: blur(3px); /* Add blur to the glow */
+  opacity: 0.7;
+}
+/* Inner progress bar needs a higher z-index */
+.glow-border .progress {
+    position: relative;
+    z-index: 1;
+    margin: 0; /* Remove margin if container has padding */
+}
+
+@keyframes glowing-border-progress {
+  0% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
+
+
+/* Gradient Overlay (Example, not used currently) */
+.gradient-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.gradient-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, rgba(123, 0, 65, 0.6) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none; /* Allow interaction below */
+}
+.gradient-overlay:hover::after {
+  opacity: 1;
+}
+
+
+/* Glowing Icons */
+.icon-glow {
+  position: relative;
+  color: var(--primary-color);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  z-index: 1; /* Ensure icon is above its glow */
+}
+.icon-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%; /* Base size */
+  background: radial-gradient(
+    circle,
+    rgba(248, 213, 126, 0.6) 0%, /* Accent color glow */
+    rgba(248, 213, 126, 0) 70%
+  );
+  transform: translate(-50%, -50%) scale(0); /* Start scaled down */
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.icon-glow:hover {
+  color: var(--primary-color); /* Keep icon color */
+  /* text-shadow: 0 0 8px rgba(123, 0, 65, 0.5); */ /* Optional shadow */
+}
+.icon-glow:hover::before {
+  transform: translate(-50%, -50%) scale(2.5); /* Expand glow */
+  opacity: 1;
+}
+
+
+/* Gradient Divider */
+.gradient-divider {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--accent-color) 20%,
+    var(--primary-color) 50%,
+    var(--accent-color) 80%,
+    transparent
+  );
+  margin: 25px auto;
+  width: 70%;
+  max-width: 250px;
+  border-radius: 2px;
+}
+
+
+/* Glowing Dots (Timeline) */
+.glowing-dot {
+  /* Base styles from main.css */
+  position: relative;
+}
+.glowing-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%; /* Larger pulse area */
+  height: 200%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(123, 0, 65, 0.4) 0%, /* Softer color */
+    rgba(123, 0, 65, 0) 60% /* Fade quicker */
+  );
+  animation: pulse 2.5s infinite cubic-bezier(0.66, 0, 0, 1); /* Smoother pulse */
+  z-index: -1; /* Behind the main dot */
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+}
+
+
+/* Gradient Background Animation (Example, not used currently) */
+.gradient-bg-animate {
+  background: linear-gradient(-45deg, #f5f0e6, #f8e9d2, #f0e8db, #efe5d5);
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* Neon Glow Text (Example, not used currently) */
+.neon-text {
+  color: #fff;
+  text-shadow:
+    0 0 4px var(--primary-color),
+    0 0 8px var(--primary-color),
+    0 0 15px var(--primary-color);
+  transition: text-shadow 0.3s ease;
+}
+.neon-text:hover {
+  text-shadow:
+    0 0 5px var(--primary-color),
+    0 0 10px var(--primary-color),
+    0 0 20px var(--primary-color),
+    0 0 30px var(--primary-color);
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .glowing-bg::before {
+    filter: blur(30px); /* Reduce blur */
+    opacity: 0.5; /* Reduce opacity */
+  }
+  .glass-card {
+    backdrop-filter: blur(8px) saturate(120%); /* Less blur */
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+  }
+}
+
+@media (max-width: 576px) {
+  .gradient-text:hover { transform: none; background-position: 0% center;} /* Disable hover */
+  .btn-gradient:hover { transform: none; box-shadow: 0 4px 15px rgba(123, 0, 65, 0.2); }
+  .icon-glow:hover::before { transform: translate(-50%, -50%) scale(2); } /* Smaller glow */
+}

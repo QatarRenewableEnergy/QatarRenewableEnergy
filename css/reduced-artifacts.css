@@ -1,0 +1,158 @@
+/* Reduced Visual Artifacts and Distractions */
+:root {
+  --primary-color: #7b0041;
+  --secondary-color: #f5f0e6;
+  --accent-color: #f8d57e;
+  --text-color: #333;
+  --shadow-color: rgba(123, 0, 65, 0.2);
+  --glow-color: rgba(245, 240, 230, 0.5);
+}
+
+/* Simplified Glowing Background */
+.glowing-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--secondary-color);
+}
+
+.glowing-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(248, 213, 126, 0.2) 0%,
+    rgba(245, 240, 230, 0.4) 30%,
+    rgba(245, 240, 230, 0.6) 70%
+  );
+  transform: rotate(30deg);
+  filter: blur(30px);
+  z-index: -1;
+  animation: glow-rotate 40s linear infinite; /* Slower animation */
+  opacity: 0.7;
+}
+
+@keyframes glow-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced Particle Styling */
+.particle {
+  opacity: 0.3; /* Reduced opacity */
+  filter: blur(1px); /* Slight blur for softer appearance */
+}
+
+/* Simplified Card Hover Effects */
+.card-3d:hover {
+  transform: translateY(-5px); /* Reduced movement */
+  box-shadow: 
+    0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Simplified Button Hover Effects */
+.btn-3d:hover {
+  transform: translateY(-2px); /* Reduced movement */
+}
+
+/* Simplified Image Hover Effects */
+.image-3d-container:hover .image-3d {
+  transform: translateZ(5px); /* Reduced 3D effect */
+}
+
+/* Reduced Timeline Animation */
+.timeline-item-interactive {
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Simplified Cube */
+.cube {
+  animation: cube-rotate 40s infinite linear; /* Slower rotation */
+}
+
+@keyframes cube-rotate {
+  0% {
+    transform: rotateX(-10deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(-10deg) rotateY(360deg);
+  }
+}
+
+/* Reduced Floating Elements Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Reduced movement */
+  }
+}
+
+/* Simplified Parallax Effect */
+.parallax-layer-back {
+  transform: translateZ(-50px) scale(1.2); /* Reduced depth */
+}
+
+.parallax-layer-mid {
+  transform: translateZ(-25px) scale(1.1); /* Reduced depth */
+}
+
+/* Reduced Scroll Animations */
+.scroll-animate {
+  transition: opacity 1s ease, transform 1s ease; /* Slower transition */
+}
+
+/* Simplified Custom Cursor */
+.custom-cursor {
+  opacity: 0.5;
+  mix-blend-mode: normal;
+}
+
+/* Reduced Glowing Effects */
+.glowing-dot::before {
+  animation: pulse 3s infinite; /* Slower pulse */
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.5;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* Simplified Gradient Background Animation */
+.gradient-bg-animate {
+  animation: gradient-shift 30s ease infinite; /* Slower animation */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .glowing-bg::before {
+    filter: blur(20px);
+    opacity: 0.5;
+  }
+  
+  .card-3d:hover {
+    transform: translateY(-3px);
+  }
+  
+  .custom-cursor {
+    display: none;
+  }
+}

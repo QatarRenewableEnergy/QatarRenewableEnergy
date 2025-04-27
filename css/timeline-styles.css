@@ -1,0 +1,192 @@
+
+/* Refined Timeline Styles for Modern Look */
+.interactive-timeline {
+  position: relative;
+  padding: 40px 0; /* Increased vertical padding */
+  max-width: 900px; /* Slightly wider */
+  margin: 0 auto;
+  overflow: hidden; /* Contain elements */
+}
+
+/* Left-Right Timeline without middle line */
+.interactive-timeline.left-right-timeline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.timeline-item-interactive {
+  position: relative;
+  width: 50%;
+  margin-bottom: 40px; /* Increased spacing */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.timeline-item-interactive.visible { /* Class added by JS */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left-Right Timeline Item Styles */
+.left-right-timeline .timeline-item-interactive {
+  width: 48%;
+  padding: 0 15px;
+  left: auto;
+  text-align: center;
+}
+
+.timeline-dot-interactive {
+  position: absolute;
+  width: 16px; /* Slightly larger dot */
+  height: 16px;
+  border-radius: 50%;
+  top: 15px;
+  background-color: var(--secondary-color); /* Match background */
+  border: 3px solid var(--primary-color); /* Annabi border */
+  z-index: 2;
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hide dots in left-right layout */
+.left-right-timeline .timeline-dot-interactive {
+  display: none;
+}
+
+.timeline-item-interactive:hover .timeline-dot-interactive {
+  transform: scale(1.2);
+  background-color: var(--primary-color);
+}
+
+.timeline-content-interactive {
+  position: relative;
+  padding: 1.2rem; /* More padding */
+  background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Refined shadow */
+  display: inline-block; /* Keep inline-block */
+  max-width: 100%;
+  border: 1px solid rgba(123, 0, 65, 0.1); /* Subtle Annabi border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.left-right-timeline .timeline-content-interactive {
+  display: block;
+  width: 100%;
+}
+
+.timeline-item-interactive:hover .timeline-content-interactive {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(123, 0, 65, 0.15);
+}
+
+.timeline-content-interactive {
+  position: relative;
+  padding: 1.2rem; /* More padding */
+  background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Refined shadow */
+  display: inline-block; /* Keep inline-block */
+  max-width: 100%;
+  border: 1px solid rgba(123, 0, 65, 0.1); /* Subtle Annabi border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item-interactive:hover .timeline-content-interactive {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(123, 0, 65, 0.15);
+}
+
+.timeline-content-interactive h3 {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.1rem; /* Larger title */
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.timeline-content-interactive p {
+  margin-bottom: 0;
+  font-size: 0.9rem; /* Larger text */
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.timeline-image {
+  margin-bottom: 1rem !important;
+}
+
+.interactive-timeline .img-timeline {
+  max-height: 180px; /* Larger images */
+  width: 100%; /* Use full width of content area */
+  object-fit: cover;
+  display: block;
+  border-radius: 8px; /* More rounded corners */
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  /* Left-Right Timeline Mobile Adjustments */
+  .left-right-timeline {
+    display: block;
+  }
+  
+  .left-right-timeline .timeline-item-interactive {
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Keep 3D effects on mobile */
+  .left-right-timeline .timeline-content-interactive {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .left-right-timeline .image-3d-container {
+    transform-style: preserve-3d;
+  }
+}
+
+/* Dark Mode Timeline Adjustments */
+body.dark-mode .interactive-timeline::after {
+    background: linear-gradient(to bottom, rgba(248, 213, 126, 0), var(--primary-color), rgba(248, 213, 126, 0)); /* Gold in dark mode */
+}
+
+body.dark-mode .interactive-timeline:hover::after {
+    box-shadow: 0 0 20px rgba(248, 213, 126, 0.7); /* Gold glow */
+}
+
+body.dark-mode .timeline-dot-interactive {
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .timeline-item-interactive:hover .timeline-dot-interactive {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .timeline-content-interactive {
+    background-color: var(--card-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    border-color: rgba(248, 213, 126, 0.2); /* Subtle gold border */
+}
+
+body.dark-mode .timeline-item-interactive:hover .timeline-content-interactive {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .timeline-content-interactive h3 {
+    color: var(--primary-color);
+}
+
+body.dark-mode .timeline-content-interactive p {
+    color: var(--text-color);
+}
+
+body.dark-mode .interactive-timeline .img-timeline {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+

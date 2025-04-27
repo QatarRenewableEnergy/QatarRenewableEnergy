@@ -1,0 +1,902 @@
+/* === Scroll Fix Start === */
+html {
+  overflow-y: scroll; /* Always show scrollbar, prevents layout shift */
+  height: 100%; /* Ensure html takes full height */
+  scroll-behavior: smooth; /* Re-affirm smooth scroll base */
+}
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto;   /* Allow vertical scroll only when needed */
+  min-height: 100%; /* Ensure body can grow at least full height */
+  position: relative; /* Often needed for positioning contexts */
+}
+/* === Scroll Fix End === */
+
+/* Main CSS Styles */
+:root {
+  --primary-color: #7b0041; /* Main Annabi */
+  --secondary-color: #f5f0e6;
+  --accent-color: #f8d57e;
+  --text-color: #333333;
+  --light-text-color: #ffffff;
+  --light-annabi: #b87396; /* Define Light Annabi */
+  --shadow-color: rgba(123, 0, 65, 0.2);
+  --glow-color: rgba(245, 240, 230, 0.8);
+  --transition-speed: 0.5s;
+  --border-radius: 10px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --header-height: 80px; /* Approximate height for scroll offset */
+}
+
+/* Base Styles */
+body {
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: var(--secondary-color); /* Base background */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--primary-color); /* Headings use primary color */
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #a30057; /* Darker shade of primary */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Prevents bottom space */
+}
+
+/* Utility Classes */
+.text-primary { color: var(--primary-color) !important; }
+.bg-primary { background-color: var(--primary-color) !important; }
+.text-secondary { color: var(--secondary-color) !important; }
+.bg-secondary { background-color: var(--secondary-color) !important; }
+.text-light { color: var(--light-text-color) !important; }
+
+/* Image Height Utilities */
+/* Logo Image Sizing */
+.img-logo {
+  max-height: 55px;
+  max-width: 200px;
+  width: auto; 
+}
+.img-timeline { max-height: 150px; }
+
+/* Layout Components */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.section-title {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Navigation */
+.logo-bar {
+  align-items: center;
+  padding: 0.5rem 0;
+  position: relative; /* Needed for glass-card blur */
+  z-index: 1031; /* Above navbar */
+}
+
+.navbar {
+  padding: 0.8rem 0; /* Slightly reduced padding */
+  transition: background-color 0.3s ease;
+  position: sticky; /* Ensure it's sticky */
+  top: 0;
+  z-index: 1030; /* Standard sticky top z-index */
+}
+
+.navbar-brand {
+  font-size: 1.4rem; /* Adjusted size */
+  font-weight: 700;
+  color: var(--light-text-color); /* Explicit white */
+  transition: color 0.3s ease;
+}
+.navbar-brand:hover {
+  color: var(--accent-color); /* Gold hover */
+}
+.navbar-brand i {
+   color: var(--light-text-color); /* Ensure icon is white */
+   vertical-align: middle;
+}
+
+
+ .navbar-nav .nav-link {
+  color: var(--light-text-color); /* Explicit white */
+  padding: 0.6rem 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
+  border-radius: 5px;
+  position: relative;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--accent-color); /* Gold hover/active */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-dark .navbar-nav .nav-link .material-icons {
+  color: var(--light-text-color); /* Explicit white */
+  vertical-align: middle;
+  margin-right: 0.3rem;
+  font-size: 1.1em; /* Adjust size */
+  transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 0.6rem;
+}
+.navbar-dark .navbar-toggler-icon {
+   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-collapse {
+    /* Background applied by glass-card */
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden; /* Contain parallax/floating elements */
+}
+.floating-elements-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; /* Allow clicking through */
+    z-index: 0; /* Behind content */
+}
+
+.hero-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Stats Section */
+.stats-section {
+  position: relative;
+  z-index: 1; /* Ensure stats are above background effects */
+}
+.stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--border-radius);
+  background-color: white; /* Ensure white background */
+}
+.stat-card h3 {
+    margin-bottom: 0.5rem; /* Space below number */
+}
+.stat-card p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Timeline Section */
+.interactive-timeline {
+  position: relative;
+  padding: 20px 0;
+  max-width: 800px; /* Slightly smaller max width */
+  margin: 0 auto;
+}
+
+/* The vertical line - now centered */
+.interactive-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%; /* Center the line */
+  width: 3px; /* Slightly thinner line */
+  background: var(--primary-color);
+  border-radius: 2px;
+  transform: translateX(-50%); /* Perfect centering */
+}
+
+/* Base Timeline Item Styling */
+.timeline-item-interactive {
+  position: relative;
+  width: 50%; /* Half width for each item */
+  margin-bottom: 20px; /* Reduced space between items */
+  /* Animation properties handled in 3d-styles.css */
+}
+
+/* Left side items (odd) */
+.timeline-item-interactive:nth-child(odd) {
+  padding-right: 20px; /* Space between content and center line */
+  text-align: right;
+  left: 0;
+}
+
+/* Right side items (even) */
+.timeline-item-interactive:nth-child(even) {
+  padding-left: 20px; /* Space between content and center line */
+  text-align: left;
+  left: 50%; /* Start from middle */
+}
+
+/* Timeline Dot - centered on the line */
+.timeline-dot-interactive {
+  position: absolute;
+  width: 14px; /* Smaller dot for minimalism */
+  height: 14px;
+  border-radius: 50%;
+  top: 15px;
+  background-color: var(--primary-color);
+  border: 2px solid var(--secondary-color);
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Position dots on the center line */
+.timeline-item-interactive:nth-child(odd) .timeline-dot-interactive {
+  right: -7px; /* Half of dot width */
+}
+
+.timeline-item-interactive:nth-child(even) .timeline-dot-interactive {
+  left: -7px; /* Half of dot width */
+}
+
+.timeline-item-interactive:hover .timeline-dot-interactive {
+  transform: scale(1.3);
+  box-shadow: 0 0 8px var(--primary-color);
+}
+
+/* Timeline Content - Minimalistic */
+.timeline-content-interactive {
+  position: relative;
+  padding: 0.7rem; /* Minimal padding */
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  display: inline-block; /* To match its parent's text alignment */
+  max-width: 95%; /* Don't take full width of its side */
+}
+
+.timeline-content-interactive h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.95rem; /* Smaller title */
+}
+
+.timeline-content-interactive p {
+  margin-bottom: 0;
+  font-size: 0.8rem; /* Smaller text */
+  line-height: 1.4;
+}
+
+/* Make images bigger */
+.timeline-image {
+  margin-bottom: 0.5rem !important;
+}
+
+.interactive-timeline .img-timeline {
+  max-height: 140px; /* Larger images as requested */
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Mobile view - revert to single column */
+@media (max-width: 768px) {
+  .interactive-timeline::before {
+    left: 30px; /* Move line to the left */
+    transform: none; /* Remove centering transform */
+  }
+  
+  .timeline-item-interactive,
+  .timeline-item-interactive:nth-child(odd),
+  .timeline-item-interactive:nth-child(even) {
+    width: 100%;
+    left: 0;
+    padding-left: 60px; /* Space for the line and dot */
+    padding-right: 0;
+    text-align: left;
+  }
+  
+  .timeline-item-interactive:nth-child(odd) .timeline-dot-interactive,
+  .timeline-item-interactive:nth-child(even) .timeline-dot-interactive {
+    left: 23px; /* Center on the line */
+    right: auto;
+  }
+  
+  .interactive-timeline .img-timeline {
+    max-height: 120px; /* Slightly smaller on mobile */
+  }
+}
+
+/* Cards */
+.card {
+  border-radius: var(--border-radius);
+  overflow: hidden; /* Important for effects like glass-card */
+  transition: all 0.3s ease;
+  border: none; /* Remove default Bootstrap border */
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 30px;
+  padding: 0.7rem 1.8rem; /* Slightly larger padding */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  border: 2px solid transparent; /* Base border */
+  white-space: nowrap; /* Prevent text wrapping */
+
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--light-text-color);
+}
+.btn-primary:hover {
+  background-color: #a30057;
+  border-color: #a30057;
+  color: var(--light-text-color);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background-color: transparent;
+}
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  border-color: var(--primary-color);
+}
+
+/* Accordion */
+.accordion-item {
+  border: none;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  overflow: hidden; /* Important for glass-card */
+}
+
+.accordion-button {
+  background-color: rgba(255, 255, 255, 0.7); /* Slightly opaque white */
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius) !important; /* Override Bootstrap */
+  text-align: right; /* Ensure RTL text alignment */
+}
+.accordion-button::after {
+    margin-left: 0; /* Remove default margin */
+    margin-right: auto; /* Push arrow to the left */
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+.accordion-button:not(.collapsed)::after {
+   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(123, 0, 65, 0.25); /* Primary color focus */
+  border-color: transparent;
+}
+
+.accordion-body {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.5); /* More transparent */
+}
+
+/* Progress Bars */
+.progress-item {
+    /* Styling for container */
+}
+.progress {
+  height: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1); /* Darker background */
+  margin-bottom: 0.5rem;
+  overflow: visible; /* Allow glow */
+}
+.progress-bar {
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+
+/* Form Elements */
+.form-control {
+  border-radius: var(--border-radius);
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(123, 0, 65, 0.25);
+  border-color: var(--primary-color);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.form-range {
+  height: 6px;
+  padding: 0; /* Remove default padding */
+}
+.form-range::-webkit-slider-thumb {
+  background-color: var(--primary-color);
+  width: 18px; /* Larger thumb */
+  height: 18px;
+  margin-top: -6px; /* Center thumb vertically */
+}
+.form-range::-moz-range-thumb {
+  background-color: var(--primary-color);
+   width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+}
+
+/* Checkbox/Radio */
+.form-check-input {
+    border-color: rgba(0,0,0,0.25);
+}
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(123, 0, 65, 0.25);
+    border-color: var(--primary-color);
+}
+.form-check-label {
+    cursor: pointer;
+}
+
+
+/* Icons */
+.material-icons {
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+/* Footer */
+footer {
+  /* background-color: var(--primary-color); */ /* Using glass-card */
+  color: var(--primary-color); /* Text color on glass */
+  padding: 1.5rem 0; /* Reduced padding */
+  margin-top: var(--spacing-lg); /* Space above footer */
+  position: relative; /* Needed for glass-card */
+  z-index: 1;
+}
+footer p {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+
+/* Media Queries */
+@media (max-width: 992px) {
+  /* Timeline adjustments for smaller screens */
+  .interactive-timeline::before {
+    left: 30px; /* Keep line position consistent */
+  }
+  .timeline-item-interactive {
+    padding-left: 70px; /* Ensure enough space */
+    padding-right: 15px; /* Add some padding on the right */
+    width: 100%;
+    text-align: right; /* Maintain RTL alignment */
+  }
+  .timeline-dot-interactive {
+    left: 21px; /* Keep dot position consistent */
+    right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 0;
+    text-align: center; /* Center text on smaller screens */
+  }
+  .hero-section .row {
+      flex-direction: column-reverse; /* Stack image above text */
+  }
+   .hero-section .col-lg-6 {
+      width: 100%;
+      margin-bottom: 2rem;
+  }
+  .hero-section .text-3d {
+      font-size: 2.5rem; /* Adjust heading size */
+  }
+  .hero-section .gradient-text {
+      font-size: 1.5rem;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+  }
+
+  .navbar-brand {
+     font-size: 1.2rem;
+  }
+  .navbar-nav {
+      margin-top: 0.5rem;
+  }
+
+  .footer .row > div {
+      text-align: center !important; /* Center footer text */
+      margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+      font-size: 0.95rem; /* Adjust base font size */
+  }
+  .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .stat-card {
+    padding: 1.2rem;
+  }
+  .counter-3d {
+      font-size: 2rem;
+  }
+  .interactive-timeline::before {
+      left: 20px;
+  }
+    .timeline-item-interactive {
+      padding-left: 60px; /* Increased from 55px */
+    }
+    .timeline-dot-interactive {
+      left: 16px; /* Adjusted to center with 18px dot width */
+      width: 18px; height: 18px; border-width: 2px;
+    }
+   .timeline-content-interactive h3 {
+      font-size: 1.3rem;
+   }
+}
+
+/* Print Styles */
+@media print {
+  .navbar, .logo-bar, .hero-section, footer, .scroll-top-btn, .scroll-progress, .particle-container, .custom-cursor-dot, .custom-cursor-outline, #quiz-container, #benefits .col-lg-8 {
+    display: none !important; /* Hide non-essential elements */
+  }
+  body {
+    font-size: 11pt;
+    color: #000 !important;
+    background-color: #fff !important;
+  }
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0; margin: 0;
+  }
+  .card, .glass-card {
+      box-shadow: none !important;
+      border: 1px solid #ccc !important;
+      background: #fff !important;
+      backdrop-filter: none !important;
+  }
+  h1, h2, h3, h4, h5, h6, .gradient-text {
+      color: #000 !important;
+      background: none !important;
+      text-shadow: none !important;
+  }
+  .text-primary { color: #000 !important; }
+  .text-success { color: #000 !important; }
+  /* Add more print-specific overrides as needed */
+}
+
+/* Accessibility Focus */
+:focus-visible { /* Use :focus-visible for keyboard-only focus styles */
+  outline: 3px solid rgba(123, 0, 65, 0.5);
+  outline-offset: 2px;
+  box-shadow: none; /* Prevent interfering shadows */
+}
+/* Remove default outline when :focus-visible is supported */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+.sr-only { /* Screen reader only text */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important; /* Disable smooth scroll */
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    animation-delay: -0.0001s !important; /* Try to force animation end */
+  }
+  /* Disable specific complex animations */
+  .glowing-bg::before, .cube, .floating-element, .parallax-layer, .particle, .ripple, .glowing-dot::before, .gradient-bg-animate {
+      animation: none !important;
+  }
+  .scroll-animate {
+      opacity: 1 !important;
+      transform: none !important;
+  }
+   .card-3d:hover, .btn-3d:hover, .image-3d-container:hover .image-3d, .counter-3d.counted, .tilt-element:hover, .magnetic-btn:hover, .glass-card:hover {
+      transform: none !important; /* Disable hover transforms */
+  }
+   .custom-cursor-dot, .custom-cursor-outline {
+        display: none !important; /* Hide custom cursor */
+    }
+}
+
+/* === Navbar Color Edits Start === */
+
+/* Default Link and Icon Color */
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--light-annabi); /* Default: Light Annabi */
+  font-weight: 500; /* Ensure weight */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+.navbar-dark .navbar-nav .nav-link .material-icons {
+  color: var(--light-annabi); /* Default: Light Annabi */
+  transition: color 0.3s ease;
+  vertical-align: middle; /* Ensure alignment */
+  margin-right: 0.3rem;
+}
+
+/* Hover/Active Link and Icon Color */
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--primary-color); /* Hover/Active: Main Annabi */
+  background-color: rgba(123, 0, 65, 0.1); /* Subtle background tint */
+}
+.navbar-dark .navbar-nav .nav-link:hover .material-icons,
+.navbar-dark .navbar-nav .nav-link.active .material-icons {
+  color: var(--primary-color); /* Hover/Active: Main Annabi */
+}
+
+/* Navbar Brand (Title) Color */
+.navbar-brand {
+  color: var(--light-annabi); /* Default: Light Annabi */
+  transition: color 0.3s ease;
+}
+.navbar-brand:hover {
+  color: var(--primary-color); /* Hover: Main Annabi */
+}
+.navbar-brand i.animated-icon {
+  color: var(--light-annabi); /* Ensure icon matches */
+  transition: color 0.3s ease;
+}
+.navbar-brand:hover i.animated-icon {
+  color: var(--primary-color); /* Ensure icon matches on hover */
+}
+/* === Navbar Color Edits End === */
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(255,255,255,0.8); display:flex;
+    align-items:center; justify-content:center; z-index:2000;
+}
+/* Breadcrumb */
+.breadcrumb { --bs-breadcrumb-divider: '>'; }
+.breadcrumb a { color: var(--primary-color); }
+.breadcrumb .active { color: var(--text-color); }
+/* Mobile TOC select */
+#toc-select { width:100%; }
+#toc-select:focus { outline:none; }
+
+/* Navbar logos */
+.navbar-logo .img-logo-nav {
+  max-height: 50px;
+  width: auto;
+}
+
+/* Offcanvas Menu RTL Support */
+.offcanvas.offcanvas-end {
+    left: 0;
+    right: auto;
+    transform: translateX(-100%);
+}
+
+.offcanvas.offcanvas-end.show {
+    transform: translateX(0);
+}
+
+/* Improve navbar item spacing and alignment */
+.navbar-nav .nav-link {
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-link .material-icons {
+    margin-left: 0.5rem;
+    margin-right: 0.25rem;
+}
+
+/* Ensure offcanvas has proper z-index */
+.offcanvas {
+    z-index: 1050;
+}
+
+/* Make mobile navbar prettier */
+.offcanvas-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Minimalistic Timeline Styles */
+.interactive-timeline .timeline-content-interactive {
+    padding: 1rem; /* Reduce padding */
+    margin-bottom: 0.5rem; /* Reduce space below card */
+}
+
+.interactive-timeline .timeline-content-interactive h3 {
+    font-size: 1.1rem; /* Smaller heading */
+    margin-bottom: 0.5rem; /* Reduce space below heading */
+}
+
+.interactive-timeline .timeline-image {
+    margin-bottom: 0.75rem !important; /* Reduce space below image */
+}
+
+.interactive-timeline .img-timeline {
+    max-height: 120px; /* Limit image height */
+    width: auto; /* Maintain aspect ratio */
+    max-width: 100%;
+    object-fit: cover; /* Cover the area nicely */
+    margin-left: auto; /* Center image if container is wider */
+    margin-right: auto;
+}
+
+.interactive-timeline .timeline-content-interactive p {
+    font-size: 0.875rem; /* Smaller paragraph text */
+    margin-bottom: 0; /* Remove space below paragraph */
+}
+
+.interactive-timeline .timeline-dot-interactive {
+    /* Optional: Make dot smaller if desired */
+    /* width: 12px; */
+    /* height: 12px; */
+}
+
+/* Ensure unified timeline items don't overlap too much */
+.unified-timeline .timeline-item-interactive:not(:last-child) {
+    margin-bottom: 1rem; /* Adjust spacing between items */
+}
+
+/* Ensure navbar items stay on one line */
+.navbar-nav {
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Allow horizontal scrolling if needed on small screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+.navbar-nav::-webkit-scrollbar { 
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.navbar-nav .nav-link {
+    white-space: nowrap; /* Prevent text wrapping within links */
+    /* Optional: Slightly reduce padding if needed */
+    /* padding: 0.6rem 0.8rem; */ 
+}
+
+
+
+/* Additional Mobile Responsiveness Adjustments */
+@media (max-width: 991.98px) { /* Bootstrap lg breakpoint */
+    .navbar-nav {
+        /* Ensure horizontal scroll works well within collapsed menu */
+        padding-bottom: 10px; /* Add some space below scrolled items */
+    }
+    #dark-mode-toggle {
+        margin-left: 0 !important; /* Remove left margin in collapsed view */
+        margin-right: auto; /* Push to the right side if needed, or keep default */
+        display: block; /* Ensure it's visible */
+        width: fit-content; /* Size based on content */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Adjust logo sizes for smaller screens */
+    .img-logo {
+        max-height: 45px; /* Slightly smaller logos */
+    }
+    .logo-bar .col-md-6 {
+        text-align: center !important; /* Center logos */
+    }
+    .logo-bar .col-md-6:last-child {
+        margin-top: 5px; /* Add small space between logos when stacked */
+    }
+
+    /* Ensure stats cards stack nicely */
+    .stats-section .col-md-3 {
+        width: 50%; /* Two cards per row on medium screens */
+    }
+
+    /* Adjust padding for sections */
+    .hero-section, section {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Further adjustments for very small screens */
+    .stats-section .col-md-3 {
+        width: 100%; /* One card per row on small screens */
+    }
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+    .hero-section h2 {
+        font-size: 1.3rem;
+    }
+    .navbar-brand {
+        font-size: 1.1rem; /* Smaller brand text */
+    }
+    .img-logo {
+        max-height: 40px; /* Even smaller logos */
+    }
+    /* Adjust loading cube size for small screens */
+    .loader-cube {
+        width: 50px;
+        height: 50px;
+    }
+    .loader-cube .face {
+        width: 50px;
+        height: 50px;
+    }
+    .loader-cube .front  { transform: translateZ(25px); }
+    .loader-cube .back   { transform: rotateY(180deg) translateZ(25px); }
+    .loader-cube .right  { transform: rotateY(90deg) translateZ(25px); }
+    .loader-cube .left   { transform: rotateY(-90deg) translateZ(25px); }
+    .loader-cube .top    { transform: rotateX(90deg) translateZ(25px); }
+    .loader-cube .bottom { transform: rotateX(-90deg) translateZ(25px); }
+}
+
