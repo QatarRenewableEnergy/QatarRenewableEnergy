@@ -1,0 +1,61 @@
+/* Particles Animation */
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Special styling for first and last slides */
+#slide-1, #slide-10 {
+    background: linear-gradient(135deg, #7b0041 0%, #a30057 100%);
+    color: white;
+}
+
+#slide-1 .slide-title, 
+#slide-10 .slide-title,
+#slide-1 .slide-subtitle,
+#slide-10 .slide-subtitle,
+#slide-1 p,
+#slide-10 p {
+    color: white !important;
+}
+
+#slide-1 .logo-large,
+#slide-10 .logo-large {
+    position: static;
+    height: 80px;
+}
+
+#slide-1 .title-slide-layout,
+#slide-10 .title-slide-layout {
+    position: relative;
+    z-index: 2;
+}
+
+#slide-1 .logo-container,
+#slide-10 .logo-container {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+#slide-1 .maroon-gradient,
+#slide-10 .maroon-gradient {
+    background: white;
+}
