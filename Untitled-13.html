@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>التوصيات والرؤية المستقبلية</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+        <style>
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; 
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            direction: rtl;
+        }
+
+        .slide-container {
+            width: 100%; 
+            height: 100%; 
+            
+            background: linear-gradient(135deg, #f5f0e6 0%, #e6e0d6 100%);
+            position: relative;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            background-color: rgba(123, 0, 65, 0.1);
+            border-radius: 50%;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: clamp(1rem, 3vh, 2rem); 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; 
+        }
+
+        .heading {
+            font-size: clamp(1.98rem, 4.6vw, 3.08rem); 
+            font-weight: 700;
+            color: #7b0041;
+            text-align: center;
+            margin-bottom: clamp(1rem, 3vh, 1.5rem);
+            position: relative;
+            padding-bottom: 0.5rem;
+             flex-shrink: 0;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #f8d57e;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: clamp(1rem, 3vw, 2rem); 
+            margin-top: 1.5rem;
+            flex-grow: 1; 
+            min-height: 0; 
+        }
+         @media (min-width: 992px) { 
+             .main-container {
+                 grid-template-columns: 1fr 1fr;
+             }
+         }
+
+        .section-title {
+            font-size: clamp(1.54rem, 3.45vw, 1.98rem); 
+            font-weight: 700;
+            color: #7b0041;
+            text-align: center;
+            margin-bottom: 1.5rem;
+             flex-shrink: 0;
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(0.8rem, 1.5vh, 1rem); 
+        }
+
+        .recommendation-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: clamp(0.8rem, 1.5vh, 1rem); 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-start; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recommendation-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .icon-container {
+            width: clamp(40px, 7vw, 50px); 
+            height: clamp(40px, 7vw, 50px); 
+            border-radius: 50%;
+            background-color: rgba(123, 0, 65, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: clamp(0.8rem, 2vw, 1rem); 
+            flex-shrink: 0;
+        }
+
+        .icon-container i {
+            font-size: clamp(1.32rem, 2.88vw, 1.65rem); 
+            color: #7b0041;
+        }
+
+        .recommendation-text {
+            flex-grow: 1;
+        }
+
+        .recommendation-title {
+            font-size: clamp(1.1rem, 2.53vw, 1.32rem); 
+            font-weight: 700;
+            color: #7b0041;
+            margin-bottom: 0.3rem;
+        }
+
+        .recommendation-desc {
+            font-size: clamp(0.94rem, 2.07vw, 1.04rem); 
+            color: #333;
+             line-height: 1.5;
+        }
+
+        .vision-container {
+            background: linear-gradient(135deg, #7b0041 0%, #a3005c 100%);
+            color: white;
+            border-radius: 12px;
+            padding: clamp(1rem, 2vw, 1.5rem); 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vision-title {
+            font-size: clamp(1.54rem, 3.45vw, 1.98rem); 
+            font-weight: 700;
+            color: #f8d57e;
+            margin-bottom: 1rem;
+            text-align: center;
+             flex-shrink: 0;
+        }
+
+        .timeline-container {
+            margin: 1rem 0;
+             flex-grow: 1; 
+             overflow-y: auto; 
+             padding-right: 5px; 
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: clamp(1rem, 2vh, 1.5rem); 
+            position: relative;
+             align-items: flex-start; 
+        }
+
+        .timeline-year {
+            background-color: #f8d57e;
+            color: #7b0041;
+            font-weight: 700;
+            font-size: clamp(1.1rem, 2.3vw, 1.32rem); 
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin-left: 1rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(60px, 10vw, 80px); 
+            text-align: center;
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+        }
+
+        .timeline-item-title {
+            font-size: clamp(0.99rem, 2.3vw, 1.21rem); 
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item-text {
+            font-size: clamp(0.88rem, 1.95vw, 1.04rem); 
+             line-height: 1.5;
+        }
+
+        .vision-footer {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: clamp(0.8rem, 1.5vh, 1rem); 
+            border-radius: 8px;
+            text-align: center;
+            margin-top: auto; 
+             flex-shrink: 0;
+        }
+
+        .vision-footer-text {
+            font-size: clamp(0.99rem, 2.3vw, 1.21rem); 
+            font-weight: 500;
+        }
+         .vision-footer-text i { margin-left: 0.5rem; }
+
+        
+    
+/* Element Entrance Animations */
+.logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s; /* Added base delay */
+}
+
+body.animate-in .logos,
+body.animate-in .main-title,
+body.animate-in .subtitle,
+body.animate-in .authors,
+body.animate-in .footer-prompt,
+body.animate-in .main-heading,
+body.animate-in .conclusion,
+body.animate-in .team-container,
+body.animate-in .slide-content > *,
+body.animate-in .content > div:not(.logos):not(.footer-prompt) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggering - apply to common elements or use more specific selectors */
+body.animate-in .logos { transition-delay: 0.1s; }
+body.animate-in .main-title, body.animate-in .main-heading { transition-delay: 0.2s; }
+body.animate-in .subtitle, body.animate-in .conclusion { transition-delay: 0.3s; }
+body.animate-in .authors { transition-delay: 0.4s; }
+body.animate-in .team-container { transition-delay: 0.4s; }
+body.animate-in .footer-prompt { transition-delay: 0.5s; }
+
+/* Example for staggering list items or grid items */
+body.animate-in .slide-content > *:nth-child(1), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(1) { transition-delay: 0.2s; }
+body.animate-in .slide-content > *:nth-child(2), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(2) { transition-delay: 0.3s; }
+body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(3) { transition-delay: 0.4s; }
+/* Add more nth-child rules if needed */
+
+</style>
+    </head>
+    <body>
+        <div class="slide-container">
+            <div class="particles-container" id="particles"></div>
+
+            <div class="content">
+                <h1 class="heading">التوصيات والرؤية المستقبلية</h1>
+
+                <div class="main-container">
+                    <div class="recommendations-section">
+                        <h2 class="section-title">التوصيات الرئيسية</h2>
+
+                        <div class="recommendations">
+                            <div class="recommendation-item">
+                                <div class="icon-container">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    <h3 class="recommendation-title">زيادة
+                                        الاستثمارات</h3>
+                                    <p class="recommendation-desc">تخصيص ميزانية
+                                        حكومية أكبر لمشاريع الطاقة المتجددة
+                                        وتقديم حوافز للقطاع الخاص.</p>
+                                </div>
+                            </div>
+
+                            <div class="recommendation-item">
+                                <div class="icon-container">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    <h3 class="recommendation-title">التعليم
+                                        والتدريب</h3>
+                                    <p class="recommendation-desc">تطوير برامج
+                                        أكاديمية ودورات تدريبية لتأهيل الكوادر
+                                        الوطنية في مجال الطاقة المتجددة.</p>
+                                </div>
+                            </div>
+
+                            <div class="recommendation-item">
+                                <div class="icon-container">
+                                    <i class="fas fa-gavel"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    <h3 class="recommendation-title">دعم
+                                        السياسات</h3>
+                                    <p class="recommendation-desc">وضع سياسات
+                                        وتشريعات محفزة وتطوير نظم تعرفة تشجيعية
+                                        للمنتجين المستقلين.</p>
+                                </div>
+                            </div>
+
+                            <div class="recommendation-item">
+                                <div class="icon-container">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    <h3 class="recommendation-title">البحث
+                                        والتطوير</h3>
+                                    <p class="recommendation-desc">تكثيف الأبحاث
+                                        في التقنيات المناسبة لبيئة قطر وتطوير
+                                        حلول لتحديات الغبار والحرارة.</p>
+                                </div>
+                            </div>
+
+                            <div class="recommendation-item">
+                                <div class="icon-container">
+                                    <i class="fas fa-globe-americas"></i>
+                                </div>
+                                <div class="recommendation-text">
+                                    <h3 class="recommendation-title">التعاون
+                                        الدولي</h3>
+                                    <p class="recommendation-desc">تعزيز
+                                        الشراكات مع المنظمات والدول الرائدة
+                                        للاستفادة من خبراتها وتقنياتها.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vision-section">
+                        <div class="vision-container">
+                            <h2 class="vision-title">الرؤية المستقبلية</h2>
+
+                            <div class="timeline-container">
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2025</div>
+                                    <div class="timeline-content">
+                                        <h3 class="timeline-item-title">10% طاقة
+                                            متجددة</h3>
+                                        <p class="timeline-item-text">الوصول
+                                            للهدف المرحلي بإنتاج 10% من الكهرباء
+                                            من مصادر متجددة.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2027</div>
+                                    <div class="timeline-content">
+                                        <h3 class="timeline-item-title">توطين
+                                            الصناعات</h3>
+                                        <p class="timeline-item-text">إنشاء
+                                            صناعات محلية لمكونات الأنظمة وتوفير
+                                            2000+ وظيفة.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2030</div>
+                                    <div class="timeline-content">
+                                        <h3 class="timeline-item-title">هدف 20%
+                                            وخفض الانبعاثات</h3>
+                                        <p class="timeline-item-text">إنتاج 20%
+                                            من الكهرباء متجددة وخفض انبعاثات
+                                            الكربون بنسبة 25%.</p>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item">
+                                    <div class="timeline-year">2035+</div>
+                                    <div class="timeline-content">
+                                        <h3 class="timeline-item-title">مركز
+                                            إقليمي للطاقة</h3>
+                                        <p class="timeline-item-text">تحول قطر
+                                            لمركز إقليمي للخبرة والابتكار في
+                                            حلول الطاقة المتجددة.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vision-footer">
+                                <p class="vision-footer-text">
+                                    <i class="fas fa-lightbulb"></i>
+                                    التحول نحو مستقبل مستدام يجمع النمو
+                                    الاقتصادي وحماية البيئة
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+            </div>
+        </div>
+
+        <script>
+        
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        const definedKeyframes = new Set(); 
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const size = Math.random() * 6 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            
+            particle.style.opacity = Math.random() * 0.2 + 0.1;
+
+            
+            const duration = Math.random() * 30 + 20;
+            const delay = Math.random() * 5;
+            const animationName = `float_p13_${i}`; 
+
+            particle.style.animation = `${animationName} ${duration}s ${delay}s infinite linear`;
+
+            particlesContainer.appendChild(particle);
+
+            
+             if (!definedKeyframes.has(animationName)) {
+                const style = document.createElement('style');
+                 const x1=Math.random()*200-100, y1=Math.random()*200-100;
+                 const x2=Math.random()*200-100, y2=Math.random()*200-100;
+                 const x3=Math.random()*200-100, y3=Math.random()*200-100;
+                style.textContent = `
+                    @keyframes ${animationName} {
+                        0% { transform: translate(0, 0); }
+                        25% { transform: translate(${x1}px, ${y1}px); }
+                        50% { transform: translate(${x2}px, ${y2}px); }
+                        75% { transform: translate(${x3}px, ${y3}px); }
+                        100% { transform: translate(0, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+                definedKeyframes.add(animationName);
+             }
+        }
+    </script>
+    
+<script>
+  window.addEventListener('message', function(event) {
+    // Basic check for security and relevance
+    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+      return;
+    }
+    console.log('Slide activated message received in iframe: ' + window.location.pathname);
+    // Add class to body to trigger animations defined in CSS
+    // Remove class first to ensure animation restarts if slide is revisited
+    document.body.classList.remove('animate-in');
+    // Force reflow/repaint might be needed for reliable restart
+    void document.body.offsetWidth;
+    document.body.classList.add('animate-in');
+
+  });
+
+  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
+  // Assumes parent frame loads slide 1 as active initially without sending a message.
+  if (window.location.pathname.endsWith('Untitled-1.html')) {
+     document.addEventListener('DOMContentLoaded', () => {
+         console.log('Initial animation for slide 1');
+         document.body.classList.add('animate-in');
+     });
+  }
+</script>
+</body>
+</html>

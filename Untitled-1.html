@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>من الوقود الأحفوري إلى الطاقة المتجددة</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap"
+            rel="stylesheet">
+        <style>
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; 
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            direction: rtl;
+        }
+
+        .slide-container {
+            width: 100%;  
+            height: 100%; 
+            
+            background: linear-gradient(135deg, #7b0041 0%, #4d0029 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+            padding: 2rem;
+            flex-grow: 1; 
+        }
+
+        .logos {
+            display: flex;
+            justify-content: space-between;
+            flex-shrink: 0; 
+        }
+
+        .logo {
+            height: 100px; /* Increased from 60px */
+            width: auto;
+            max-width: 300px; /* Increased max-width */
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .main-title {
+            font-size: clamp(2.75rem, 6.9vw, 4.95rem); 
+            font-weight: 900;
+            color: white;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: clamp(1.65rem, 4.6vw, 2.75rem); 
+            font-weight: 700;
+            color: #f8d57e;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .authors {
+            font-size: clamp(1.1rem, 2.88vw, 1.65rem); 
+            font-weight: 500;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(248, 213, 126, 0.3) 0%, rgba(248, 213, 126, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(30px);
+            transform: translate(-50%, -50%);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-20px); }
+        }
+
+         
+        .footer-prompt {
+            text-align: center;
+            color: white;
+            font-size: clamp(1.1rem, 2.3vw, 1.32rem); 
+            padding-bottom: 1rem; 
+            flex-shrink: 0; 
+        }
+         .footer-prompt i {
+             margin: 0 0.5rem;
+             animation: bounce 1.5s infinite;
+         }
+         @keyframes bounce {
+           0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+           40% {transform: translateY(-8px);}
+           60% {transform: translateY(-4px);}
+        }
+    
+/* Element Entrance Animations */
+.logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s; /* Added base delay */
+}
+
+body.animate-in .logos,
+body.animate-in .main-title,
+body.animate-in .subtitle,
+body.animate-in .authors,
+body.animate-in .footer-prompt,
+body.animate-in .main-heading,
+body.animate-in .conclusion,
+body.animate-in .team-container,
+body.animate-in .slide-content > *,
+body.animate-in .content > div:not(.logos):not(.footer-prompt) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggering - apply to common elements or use more specific selectors */
+body.animate-in .logos { transition-delay: 0.1s; }
+body.animate-in .main-title, body.animate-in .main-heading { transition-delay: 0.2s; }
+body.animate-in .subtitle, body.animate-in .conclusion { transition-delay: 0.3s; }
+body.animate-in .authors { transition-delay: 0.4s; }
+body.animate-in .team-container { transition-delay: 0.4s; }
+body.animate-in .footer-prompt { transition-delay: 0.5s; }
+
+/* Example for staggering list items or grid items */
+body.animate-in .slide-content > *:nth-child(1), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(1) { transition-delay: 0.2s; }
+body.animate-in .slide-content > *:nth-child(2), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(2) { transition-delay: 0.3s; }
+body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(3) { transition-delay: 0.4s; }
+/* Add more nth-child rules if needed */
+
+</style>
+    </head>
+    <body>
+        <div class="slide-container">
+            <div id="particles-js"></div>
+
+            <div class="glow" style="top: 30%; left: 70%;"></div>
+            <div class="glow" style="top: 70%; left: 30%;"></div>
+
+            <div class="content">
+                <div class="logos">
+                    <img
+                        src="images/school_logo.png"
+                        alt="مدرسة إيبلا الدولية" class="logo">
+                    <img
+                        src="images/ministry_logo.png"
+                        alt="وزارة التربية والتعليم والتعليم العالي"
+                        class="logo">
+                </div>
+
+                <div
+                    class="flex-grow flex flex-col items-center justify-center py-6 md:py-12">
+                    
+                    <h1 class="main-title">من الوقود الأحفوري<br>إلى الطاقة
+                        المتجددة</h1>
+                    <h2 class="subtitle">قطر نحو مستقبل مستدام - رؤية 2030</h2>
+                    <div class="authors">إعداد: طلاب مدرسة إيبلا الدولية</div>
+                </div>
+
+                <div class="footer-prompt">
+                    <i class="fas fa-chevron-down"></i> 
+                    انقر أو استخدم الأسهم للانتقال للشريحة التالية
+                    <i class="fas fa-chevron-down"></i> 
+                </div>
+            </div>
+        </div>
+
+        <script>
+        
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const size = Math.random() * 5 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+
+            
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+
+            particle.style.animation = `floatParticle ${duration}s ${delay}s infinite ease-in-out`; 
+
+            particlesContainer.appendChild(particle);
+        }
+         
+         if (!document.styleSheets[0].cssRules.namedItem('floatParticle')) {
+             const style = document.createElement('style');
+             style.textContent = `
+                 @keyframes floatParticle {
+                     0%, 100% { transform: translate(0, 0); }
+                     50% { transform: translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px); }
+                 }
+             `;
+             document.head.appendChild(style);
+         }
+    </script>
+    
+<script>
+  window.addEventListener('message', function(event) {
+    // Basic check for security and relevance
+    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+      return;
+    }
+    console.log('Slide activated message received in iframe: ' + window.location.pathname);
+    // Add class to body to trigger animations defined in CSS
+    // Remove class first to ensure animation restarts if slide is revisited
+    document.body.classList.remove('animate-in');
+    // Force reflow/repaint might be needed for reliable restart
+    void document.body.offsetWidth;
+    document.body.classList.add('animate-in');
+
+  });
+
+  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
+  // Assumes parent frame loads slide 1 as active initially without sending a message.
+  if (window.location.pathname.endsWith('Untitled-1.html')) {
+     document.addEventListener('DOMContentLoaded', () => {
+         console.log('Initial animation for slide 1');
+         document.body.classList.add('animate-in');
+     });
+  }
+</script>
+</body>
+</html>
+        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+        <script>
+        
+        
+
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#f8d57e",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": false
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>

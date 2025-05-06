@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>التحديات القائمة والحلول المقترحة</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+        <style>
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; 
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            direction: rtl;
+        }
+
+        .slide-container {
+            width: 100%; 
+            height: 100%; 
+            
+            background: linear-gradient(135deg, #f5f0e6 0%, #e6e0d6 100%);
+            position: relative;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            background-color: rgba(123, 0, 65, 0.1);
+            border-radius: 50%;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: clamp(0.8rem, 2vh, 1.5rem) clamp(1rem, 3vw, 2rem); 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; 
+        }
+
+        .heading {
+            font-size: clamp(1.98rem, 4.6vw, 3.08rem); 
+            font-weight: 700;
+            color: #7b0041;
+            text-align: center;
+            margin-bottom: clamp(0.5rem, 2vh, 1rem); 
+            position: relative;
+            padding-bottom: 0.5rem;
+             flex-shrink: 0;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #f8d57e;
+        }
+
+        .challenges-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(0.5rem, 1vh, 0.8rem); 
+            margin-top: 0.5rem;
+            flex-grow: 1; 
+            overflow: hidden; 
+        }
+
+        .challenge-row {
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: clamp(0.5rem, 1vh, 0.8rem); 
+             align-items: stretch; 
+        }
+
+         @media (min-width: 768px) { 
+             .challenge-row {
+                 grid-template-columns: 1fr 1fr;
+             }
+         }
+
+        .challenge-card, .solution-card {
+           
+            background-color: white;
+            border-radius: 12px;
+            padding: clamp(0.6rem, 1.5vh, 1rem); 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: flex-start; 
+             min-height: 100px; 
+        }
+
+        .challenge-card {
+            border-right: 5px solid #a3005c;
+        }
+
+        .solution-card {
+            border-right: 5px solid #f8d57e;
+        }
+
+        .challenge-card:hover, .solution-card:hover {
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); 
+        }
+
+        .icon-container {
+            width: clamp(35px, 6vw, 45px); 
+            height: clamp(35px, 6vw, 45px); 
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: clamp(0.5rem, 1.5vw, 0.8rem); 
+            flex-shrink: 0;
+        }
+
+        .challenge-icon {
+            background-color: rgba(163, 0, 92, 0.1);
+            color: #7b0041;
+        }
+
+        .solution-icon {
+            background-color: rgba(248, 213, 126, 0.2);
+            color: #7b0041;
+        }
+
+        .icon-container i {
+            font-size: clamp(1.32rem, 2.88vw, 1.65rem); 
+        }
+
+        .text-content {
+            flex-grow: 1;
+             padding-top: 0.2rem; 
+        }
+
+        .card-title {
+            font-size: clamp(1.1rem, 2.3vw, 1.32rem); 
+            font-weight: 700;
+            color: #7b0041;
+            margin-bottom: 0.3rem; 
+        }
+
+        .card-text {
+            font-size: clamp(0.88rem, 1.84vw, 1.04rem); 
+            color: #333;
+             line-height: 1.5; 
+        }
+
+        
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #7b0041 0%, #a3005c 100%);
+            border-radius: 12px;
+            padding: clamp(0.8rem, 1.5vh, 1rem) clamp(1rem, 3vw, 2rem); 
+            margin-top: clamp(0.8rem, 2vh, 1rem); 
+            text-align: center;
+            color: white;
+            flex-shrink: 0; 
+        }
+
+        .conclusion-text {
+            font-size: clamp(1.1rem, 2.53vw, 1.43rem); 
+            font-weight: 500;
+        }
+
+        
+    
+/* Element Entrance Animations */
+.logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s; /* Added base delay */
+}
+
+body.animate-in .logos,
+body.animate-in .main-title,
+body.animate-in .subtitle,
+body.animate-in .authors,
+body.animate-in .footer-prompt,
+body.animate-in .main-heading,
+body.animate-in .conclusion,
+body.animate-in .team-container,
+body.animate-in .slide-content > *,
+body.animate-in .content > div:not(.logos):not(.footer-prompt) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggering - apply to common elements or use more specific selectors */
+body.animate-in .logos { transition-delay: 0.1s; }
+body.animate-in .main-title, body.animate-in .main-heading { transition-delay: 0.2s; }
+body.animate-in .subtitle, body.animate-in .conclusion { transition-delay: 0.3s; }
+body.animate-in .authors { transition-delay: 0.4s; }
+body.animate-in .team-container { transition-delay: 0.4s; }
+body.animate-in .footer-prompt { transition-delay: 0.5s; }
+
+/* Example for staggering list items or grid items */
+body.animate-in .slide-content > *:nth-child(1), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(1) { transition-delay: 0.2s; }
+body.animate-in .slide-content > *:nth-child(2), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(2) { transition-delay: 0.3s; }
+body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(3) { transition-delay: 0.4s; }
+/* Add more nth-child rules if needed */
+
+</style>
+    </head>
+    <body>
+        <div class="slide-container">
+            <div class="particles-container" id="particles"></div>
+
+            <div class="content">
+                <h1 class="heading">التحديات القائمة والحلول المقترحة</h1>
+
+                <div class="challenges-container">
+                    <div class="challenge-row">
+                        <div class="challenge-card">
+                            <div class="icon-container challenge-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">الظروف المناخية</h3>
+                                <p class="card-text">الحرارة المرتفعة تؤثر على
+                                    كفاءة الألواح (تصل إلى 25% انخفاض).</p>
+                            </div>
+                        </div>
+
+                        <div class="solution-card">
+                            <div class="icon-container solution-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">تقنيات تبريد</h3>
+                                <p class="card-text">استخدام ألواح مصممة خصيصاً
+                                    للحرارة وأنظمة تبريد مبتكرة.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-row">
+                        <div class="challenge-card">
+                            <div class="icon-container challenge-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">الغبار والرمال</h3>
+                                <p class="card-text">تراكم الغبار يقلل الكفاءة
+                                    (20-40%) ويتطلب تنظيفاً مستمراً.</p>
+                            </div>
+                        </div>
+
+                        <div class="solution-card">
+                            <div class="icon-container solution-icon">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">أنظمة تنظيف ذاتية</h3>
+                                <p class="card-text">طلاء مضاد للغبار، روبوتات
+                                    تنظيف، تصميم مناسب للزوايا.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-row">
+                        <div class="challenge-card">
+                            <div class="icon-container challenge-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">التكاليف الأولية</h3>
+                                <p class="card-text">ارتفاع تكاليف الاستثمار
+                                    الأولية مقارنة بالمحطات التقليدية.</p>
+                            </div>
+                        </div>
+
+                        <div class="solution-card">
+                            <div class="icon-container solution-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">حوافز وشراكات</h3>
+                                <p class="card-text">حوافز حكومية، تمويل ميسر،
+                                    شراكات بين القطاعين العام والخاص.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-row">
+                        <div class="challenge-card">
+                            <div class="icon-container challenge-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">نقص الخبرات</h3>
+                                <p class="card-text">الحاجة إلى مهارات وكفاءات
+                                    متخصصة ومحدودية الخبرات المحلية.</p>
+                            </div>
+                        </div>
+
+                        <div class="solution-card">
+                            <div class="icon-container solution-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">التعليم والتدريب</h3>
+                                <p class="card-text">برامج تعليمية وتدريبية
+                                    متخصصة، شراكات دولية، نقل معرفة.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-row">
+                        <div class="challenge-card">
+                            <div class="icon-container challenge-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">التكامل مع الشبكة</h3>
+                                <p class="card-text">صعوبات دمج المصادر المتقطعة
+                                    وتحديات تخزين الطاقة.</p>
+                            </div>
+                        </div>
+
+                        <div class="solution-card">
+                            <div class="icon-container solution-icon">
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                            <div class="text-content">
+                                <h3 class="card-title">تقنيات التخزين</h3>
+                                <p class="card-text">الاستثمار في تخزين الطاقة،
+                                    شبكات ذكية، إدارة الأحمال.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conclusion-box">
+                    <p class="conclusion-text">التحديات قابلة للتجاوز عبر
+                        الابتكار والالتزام طويل المدى بأهداف الطاقة المتجددة</p>
+                </div>
+
+                
+                
+            </div>
+        </div>
+
+        <script>
+        
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        const definedKeyframes = new Set(); 
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const size = Math.random() * 6 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            
+            particle.style.opacity = Math.random() * 0.2 + 0.1;
+
+            
+            const duration = Math.random() * 30 + 20;
+            const delay = Math.random() * 5;
+             const animationName = `float_p12_${i}`; 
+
+            particle.style.animation = `${animationName} ${duration}s ${delay}s infinite linear`;
+
+            particlesContainer.appendChild(particle);
+
+            
+             if (!definedKeyframes.has(animationName)) {
+                const style = document.createElement('style');
+                 const x1=Math.random()*200-100, y1=Math.random()*200-100;
+                 const x2=Math.random()*200-100, y2=Math.random()*200-100;
+                 const x3=Math.random()*200-100, y3=Math.random()*200-100;
+                style.textContent = `
+                    @keyframes ${animationName} {
+                        0% { transform: translate(0, 0); }
+                        25% { transform: translate(${x1}px, ${y1}px); }
+                        50% { transform: translate(${x2}px, ${y2}px); }
+                        75% { transform: translate(${x3}px, ${y3}px); }
+                        100% { transform: translate(0, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+                definedKeyframes.add(animationName);
+            }
+        }
+    </script>
+    
+<script>
+  window.addEventListener('message', function(event) {
+    // Basic check for security and relevance
+    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+      return;
+    }
+    console.log('Slide activated message received in iframe: ' + window.location.pathname);
+    // Add class to body to trigger animations defined in CSS
+    // Remove class first to ensure animation restarts if slide is revisited
+    document.body.classList.remove('animate-in');
+    // Force reflow/repaint might be needed for reliable restart
+    void document.body.offsetWidth;
+    document.body.classList.add('animate-in');
+
+  });
+
+  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
+  // Assumes parent frame loads slide 1 as active initially without sending a message.
+  if (window.location.pathname.endsWith('Untitled-1.html')) {
+     document.addEventListener('DOMContentLoaded', () => {
+         console.log('Initial animation for slide 1');
+         document.body.classList.add('animate-in');
+     });
+  }
+</script>
+</body>
+</html>

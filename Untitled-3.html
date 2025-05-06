@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>أهمية الطاقة</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; 
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            direction: rtl;
+        }
+
+        .slide-container {
+            width: 100%; 
+            height: 100%; 
+            
+            background: linear-gradient(135deg, #f5f0e6 0%, #e6e0d6 100%);
+            position: relative;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            background-color: rgba(123, 0, 65, 0.1);
+            border-radius: 50%;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: clamp(1rem, 4vh, 2rem); 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; 
+        }
+
+        .heading {
+            font-size: clamp(2.2rem, 5.75vw, 3.3rem); 
+            font-weight: 700;
+            color: #7b0041;
+            text-align: center;
+            margin-bottom: clamp(1rem, 3vh, 1.5rem);
+            position: relative;
+            padding-bottom: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #f8d57e;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: clamp(1rem, 3vw, 2rem); 
+            margin-top: 1rem;
+            flex-grow: 1; 
+        }
+
+         @media (min-width: 992px) { 
+             .grid-container {
+                 grid-template-columns: 1fr 1fr;
+             }
+         }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: clamp(1rem, 3vw, 1.5rem); 
+            
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+             display: flex; 
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: clamp(1.32rem, 3.45vw, 1.76rem); 
+            font-weight: 700;
+            color: #7b0041;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .card-title i {
+            margin-left: 0.5rem;
+            font-size: clamp(1.54rem, 4.02vw, 1.98rem); 
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: clamp(1.1rem, 2.3vw, 1.32rem); 
+             flex-shrink: 0;
+        }
+
+        .list-item i {
+            color: #7b0041;
+            margin-left: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .stat-box {
+            background-color: #7b0041;
+            color: white;
+            border-radius: 8px;
+            padding: clamp(0.6rem, 1.5vh, 0.8rem); 
+            text-align: center;
+            margin-top: auto; 
+            box-shadow: 0 4px 8px rgba(123, 0, 65, 0.3);
+             flex-shrink: 0;
+        }
+
+        .stat-box .stat-number {
+            font-size: clamp(1.65rem, 4.6vw, 2.2rem); 
+            font-weight: 700;
+        }
+
+        .stat-box .stat-label {
+            font-size: clamp(0.88rem, 2.07vw, 1.1rem); 
+        }
+
+        .chart-container {
+            
+            width: 100%;
+            margin-top: 1rem;
+            flex-grow: 1; 
+            min-height: 200px; 
+            position: relative; 
+        }
+        .chart-container canvas {
+            max-height: 280px; 
+        }
+
+        .chart-text {
+             font-size: clamp(0.99rem, 2.3vw, 1.21rem);
+             color: #555;
+        }
+
+        
+    
+/* Element Entrance Animations */
+.logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s; /* Added base delay */
+}
+
+body.animate-in .logos,
+body.animate-in .main-title,
+body.animate-in .subtitle,
+body.animate-in .authors,
+body.animate-in .footer-prompt,
+body.animate-in .main-heading,
+body.animate-in .conclusion,
+body.animate-in .team-container,
+body.animate-in .slide-content > *,
+body.animate-in .content > div:not(.logos):not(.footer-prompt) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggering - apply to common elements or use more specific selectors */
+body.animate-in .logos { transition-delay: 0.1s; }
+body.animate-in .main-title, body.animate-in .main-heading { transition-delay: 0.2s; }
+body.animate-in .subtitle, body.animate-in .conclusion { transition-delay: 0.3s; }
+body.animate-in .authors { transition-delay: 0.4s; }
+body.animate-in .team-container { transition-delay: 0.4s; }
+body.animate-in .footer-prompt { transition-delay: 0.5s; }
+
+/* Example for staggering list items or grid items */
+body.animate-in .slide-content > *:nth-child(1), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(1) { transition-delay: 0.2s; }
+body.animate-in .slide-content > *:nth-child(2), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(2) { transition-delay: 0.3s; }
+body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(3) { transition-delay: 0.4s; }
+/* Add more nth-child rules if needed */
+
+</style>
+    </head>
+    <body>
+        <div class="slide-container">
+            <div class="particles-container" id="particles"></div>
+
+            <div class="content">
+                <h1 class="heading">أهمية الطاقة</h1>
+
+                <div class="grid-container">
+                    <div class="flex flex-col gap-4 md:gap-6"> 
+                        <div class="card"> 
+                            <h2 class="card-title">
+                                <i class="fas fa-globe"></i>
+                                الأهمية العالمية للطاقة
+                            </h2>
+                            <div class="list-item">
+                                <i class="fas fa-caret-left"></i>
+                                دور الطاقة في التنمية الاقتصادية
+                            </div>
+                            <div class="list-item">
+                                <i class="fas fa-caret-left"></i>
+                                الطاقة كمحرك أساسي للحياة اليومية
+                            </div>
+                            <div class="list-item">
+                                <i class="fas fa-caret-left"></i>
+                                العلاقة بين استهلاك الطاقة والتنمية الاجتماعية
+                            </div>
+
+                            <div class="stat-box">
+                                <div class="stat-number">+160,000</div>
+                                <div class="stat-label">تيراواط/ساعة من الطاقة
+                                    المستهلكة عالمياً سنوياً</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h2 class="card-title">
+                                <i class="fas fa-flag"></i>
+                                أهمية الطاقة في قطر
+                            </h2>
+                            <div class="list-item">
+                                <i class="fas fa-caret-left"></i>
+                                الطلب المتزايد على الطاقة في قطر
+                            </div>
+                            <div class="list-item">
+                                <i class="fas fa-caret-left"></i>
+                                دور الطاقة في رؤية قطر الوطنية 2030
+                            </div>
+                            <div class="list-item">
+                                <i class="fas fa-caret-left"></i>
+                                استهلاك الطاقة على المستويين الفردي والمؤسسي
+                            </div>
+
+                            <div class="stat-box">
+                                <div class="stat-number">15,000</div>
+                                <div class="stat-label">كيلوواط/ساعة متوسط
+                                    استهلاك الفرد سنوياً في قطر</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="card-title">
+                            <i class="fas fa-chart-pie"></i>
+                            إحصائيات عالمية حول استهلاك الطاقة
+                        </h2>
+
+                        <p class="mb-2 chart-text">مصادر الطاقة المستخدمة
+                            عالمياً -
+                            2023</p>
+
+                        <div class="chart-container">
+                            <canvas id="energyConsumptionChart"></canvas>
+                        </div>
+
+                        <p class="mt-4 chart-text">
+                            تشير التوقعات إلى زيادة الطلب العالمي على الطاقة
+                            بنسبة 50% بحلول عام 2050، مما يزيد من أهمية التحول
+                            نحو مصادر الطاقة المتجددة لتحقيق الاستدامة.
+                        </p>
+                    </div>
+                </div>
+
+                
+                
+            </div>
+        </div>
+
+        <script>
+        
+        const ctx = document.getElementById('energyConsumptionChart').getContext('2d');
+        const energyConsumptionChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['النفط', 'الفحم', 'الغاز الطبيعي', 'الطاقة النووية', 'الطاقة المتجددة'],
+                datasets: [{
+                    data: [33, 27, 24, 6, 10],
+                    backgroundColor: [
+                        '#7b0041',
+                        '#b87396',
+                        '#f8d57e',
+                        '#466365',
+                        '#2cb67d'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, 
+                plugins: {
+                    legend: {
+                        position: 'bottom', 
+                        labels: {
+                            font: {
+                                family: 'Tajawal',
+                                size: 12 
+                            },
+                             boxWidth: 15, 
+                             padding: 15 
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        const definedKeyframes = new Set(); 
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const size = Math.random() * 6 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            
+            particle.style.opacity = Math.random() * 0.2 + 0.1;
+
+            
+            const duration = Math.random() * 30 + 20;
+            const delay = Math.random() * 5;
+            const animationName = `float_p3_${i}`; 
+
+            particle.style.animation = `${animationName} ${duration}s ${delay}s infinite linear`;
+
+            particlesContainer.appendChild(particle);
+
+            
+             if (!definedKeyframes.has(animationName)) {
+                const style = document.createElement('style');
+                const x1=Math.random()*200-100, y1=Math.random()*200-100;
+                const x2=Math.random()*200-100, y2=Math.random()*200-100;
+                const x3=Math.random()*200-100, y3=Math.random()*200-100;
+                style.textContent = `
+                    @keyframes ${animationName} {
+                        0% { transform: translate(0, 0); }
+                        25% { transform: translate(${x1}px, ${y1}px); }
+                        50% { transform: translate(${x2}px, ${y2}px); }
+                        75% { transform: translate(${x3}px, ${y3}px); }
+                        100% { transform: translate(0, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+                definedKeyframes.add(animationName);
+            }
+        }
+    </script>
+    
+<script>
+  window.addEventListener('message', function(event) {
+    // Basic check for security and relevance
+    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+      return;
+    }
+    console.log('Slide activated message received in iframe: ' + window.location.pathname);
+    // Add class to body to trigger animations defined in CSS
+    // Remove class first to ensure animation restarts if slide is revisited
+    document.body.classList.remove('animate-in');
+    // Force reflow/repaint might be needed for reliable restart
+    void document.body.offsetWidth;
+    document.body.classList.add('animate-in');
+
+  });
+
+  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
+  // Assumes parent frame loads slide 1 as active initially without sending a message.
+  if (window.location.pathname.endsWith('Untitled-1.html')) {
+     document.addEventListener('DOMContentLoaded', () => {
+         console.log('Initial animation for slide 1');
+         document.body.classList.add('animate-in');
+     });
+  }
+</script>
+</body>
+</html>

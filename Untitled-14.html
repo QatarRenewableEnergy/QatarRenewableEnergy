@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>المصادر والمراجع</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+        <style>
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Tajawal';
+            src: url('https://cdn.jsdelivr.net/npm/@fontsource/tajawal@4.5.1/files/tajawal-arabic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; 
+            font-family: 'Tajawal', sans-serif;
+            overflow: hidden;
+            direction: rtl;
+        }
+
+        .slide-container {
+            width: 100%; 
+            height: 100%; 
+            
+            background: linear-gradient(135deg, #f5f0e6 0%, #e6e0d6 100%);
+            position: relative;
+            overflow: hidden; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            background-color: rgba(123, 0, 65, 0.1);
+            border-radius: 50%;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: clamp(1rem, 3vh, 2rem); 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; 
+        }
+
+        .heading {
+            font-size: clamp(1.98rem, 4.6vw, 3.08rem); 
+            font-weight: 700;
+            color: #7b0041;
+            text-align: center;
+            margin-bottom: clamp(1rem, 3vh, 1.5rem);
+            position: relative;
+            padding-bottom: 0.5rem;
+             flex-shrink: 0;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #f8d57e;
+        }
+
+        .references-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); 
+            gap: clamp(1rem, 2vw, 1.5rem); 
+            margin-top: 1.5rem;
+             flex-grow: 1; 
+             overflow: hidden; 
+        }
+
+        .references-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: clamp(1rem, 2vw, 1.5rem); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex; 
+            flex-direction: column; 
+             overflow-y: auto; 
+             max-height: calc(100vh - 180px); 
+        }
+
+        .section-title {
+            font-size: clamp(1.21rem, 2.88vw, 1.54rem); 
+            font-weight: 700;
+            color: #7b0041;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+             flex-shrink: 0;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+            font-size: clamp(1.32rem, 3.45vw, 1.65rem); 
+        }
+
+        .reference-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+             flex-grow: 1; 
+        }
+
+        .reference-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(123, 0, 65, 0.2);
+            position: relative;
+            padding-right: 1.5rem;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .reference-item::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #7b0041;
+        }
+
+        .reference-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.3rem;
+            font-size: clamp(0.99rem, 2.07vw, 1.1rem); 
+        }
+
+        .reference-details {
+            color: #666;
+            font-size: clamp(0.88rem, 1.84vw, 1.04rem); 
+        }
+
+        .reference-link {
+            color: #7b0041;
+            text-decoration: none;
+            display: block;
+            margin-top: 0.3rem;
+            font-size: clamp(0.83rem, 1.72vw, 0.99rem); 
+             word-break: break-all; 
+        }
+
+        .reference-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            background-color: rgba(123, 0, 65, 0.05);
+            border-radius: 10px;
+            padding: clamp(0.8rem, 1.5vh, 1rem); 
+            text-align: center;
+            margin-top: 1.5rem;
+            flex-shrink: 0; 
+        }
+
+        .footer-note-text {
+            font-size: clamp(0.99rem, 2.3vw, 1.21rem); 
+            color: #7b0041;
+            font-weight: 500;
+        }
+         .footer-note-text i { margin-left: 0.5rem; }
+
+        
+    
+/* Element Entrance Animations */
+.logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s, transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) 0.1s; /* Added base delay */
+}
+
+body.animate-in .logos,
+body.animate-in .main-title,
+body.animate-in .subtitle,
+body.animate-in .authors,
+body.animate-in .footer-prompt,
+body.animate-in .main-heading,
+body.animate-in .conclusion,
+body.animate-in .team-container,
+body.animate-in .slide-content > *,
+body.animate-in .content > div:not(.logos):not(.footer-prompt) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggering - apply to common elements or use more specific selectors */
+body.animate-in .logos { transition-delay: 0.1s; }
+body.animate-in .main-title, body.animate-in .main-heading { transition-delay: 0.2s; }
+body.animate-in .subtitle, body.animate-in .conclusion { transition-delay: 0.3s; }
+body.animate-in .authors { transition-delay: 0.4s; }
+body.animate-in .team-container { transition-delay: 0.4s; }
+body.animate-in .footer-prompt { transition-delay: 0.5s; }
+
+/* Example for staggering list items or grid items */
+body.animate-in .slide-content > *:nth-child(1), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(1) { transition-delay: 0.2s; }
+body.animate-in .slide-content > *:nth-child(2), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(2) { transition-delay: 0.3s; }
+body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:not(.logos):not(.footer-prompt):nth-child(3) { transition-delay: 0.4s; }
+/* Add more nth-child rules if needed */
+
+</style>
+    </head>
+    <body>
+        <div class="slide-container">
+            <div class="particles-container" id="particles"></div>
+
+            <div class="content">
+                <h1 class="heading">المصادر والمراجع</h1>
+
+                <div class="references-container">
+                    <div class="references-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-landmark"></i>
+                            تقارير ومنشورات حكومية
+                        </h2>
+
+                        <ul class="reference-list">
+                            <li class="reference-item">
+                                <div class="reference-title">وزارة الطاقة
+                                    القطرية (2022).
+                                    "استراتيجية الطاقة المتجددة في قطر 2030"</div>
+                                <div class="reference-details">التقرير السنوي،
+                                    الدوحة</div>
+                                <a href="#"
+                                    class="reference-link">www.moe.gov.qa/renewable-strategy</a>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">جهاز التخطيط
+                                    والإحصاء (2023).
+                                    "دور الطاقة المتجددة في رؤية قطر 2030"</div>
+                                <div class="reference-details">منشورات الجهاز،
+                                    الدوحة</div>
+                                <a href="#"
+                                    class="reference-link">www.psa.gov.qa/qnv-energy</a>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">كهرماء (2022).
+                                    "تقرير الاستدامة السنوي"</div>
+                                <div class="reference-details">التقرير السنوي،
+                                    الدوحة</div>
+                                <a href="#"
+                                    class="reference-link">www.km.qa/sustainability-2022</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="references-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-university"></i>
+                            الأبحاث الأكاديمية
+                        </h2>
+
+                        <ul class="reference-list">
+                            <li class="reference-item">
+                                <div class="reference-title">الشمري، م. وآخرون
+                                    (2023).
+                                    "تأثير المناخ على كفاءة الألواح الشمسية بقطر"</div>
+                                <div class="reference-details">مجلة جامعة قطر
+                                    للعلوم والهندسة، 35(2)، 87-102</div>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">العبدالله، ع.
+                                    والعطية، خ. (2022).
+                                    "تقييم اقتصادي لمشاريع الطاقة المتجددة الخليجية"</div>
+                                <div class="reference-details">مجلة دراسات
+                                    الطاقة المتجددة، 18(4)، 214-230</div>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">معهد قطر لبحوث
+                                    البيئة والطاقة (2021).
+                                    "دراسة أداء محطة الخرسعة الشمسية"</div>
+                                <div class="reference-details">تقرير بحثي،
+                                    الدوحة</div>
+                                <a href="#"
+                                    class="reference-link">www.qeeri.org.qa/kharsaah-report</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="references-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-globe-asia"></i>
+                            المنظمات والتقارير الدولية
+                        </h2>
+
+                        <ul class="reference-list">
+                            <li class="reference-item">
+                                <div class="reference-title">IRENA (2023).
+                                    "آفاق الطاقة المتجددة في الشرق الأوسط"</div>
+                                <div class="reference-details">التقرير السنوي،
+                                    أبوظبي</div>
+                                <a href="#"
+                                    class="reference-link">www.irena.org/mena-outlook-2023</a>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">البنك الدولي
+                                    (2022).
+                                    "تقرير حالة تحول الطاقة العالمي"</div>
+                                <div class="reference-details">واشنطن</div>
+                                <a href="#"
+                                    class="reference-link">www.worldbank.org/energy-transition</a>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">KAPSARC (2022).
+                                    "تنويع مصادر الطاقة في دول الخليج"</div>
+                                <div class="reference-details">الرياض</div>
+                                <a href="#"
+                                    class="reference-link">www.kapsarc.org/gulf-energy</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="references-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-laptop"></i>
+                            مواقع ومصادر أخرى
+                        </h2>
+
+                        <ul class="reference-list">
+                            <li class="reference-item">
+                                <div class="reference-title">الموقع الرسمي
+                                    لمشروع الخرسعة للطاقة الشمسية</div>
+                                <div class="reference-details">تم الاطلاع: مارس
+                                    2023</div>
+                                <a href="#"
+                                    class="reference-link">www.alkharsaah-solar.qa</a>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">مجلس قطر للمباني
+                                    الخضراء (2022).
+                                    "دليل تصميم الأنظمة الشمسية للمباني"</div>
+                                <div class="reference-details">الدوحة</div>
+                                <a href="#"
+                                    class="reference-link">www.qgbc.org/solar-guide</a>
+                            </li>
+
+                            <li class="reference-item">
+                                <div class="reference-title">شبكة أخبار الطاقة
+                                    النظيفة الخليجية (2023).
+                                    "مقابلات مع خبراء الطاقة بقطر"</div>
+                                <div class="reference-details">سلسلة مقالات،
+                                    يناير-مارس 2023</div>
+                                <a href="#"
+                                    class="reference-link">www.gulfcleanenergy.net/qatar</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-note">
+                    <p class="footer-note-text">
+                        <i class="fas fa-info-circle"></i>
+                        تم جمع وتحليل البيانات من المصادر المعتمدة أعلاه
+                    </p>
+                </div>
+
+                
+                
+            </div>
+        </div>
+
+        <script>
+        
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        const definedKeyframes = new Set(); 
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            const size = Math.random() * 6 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+
+            
+            particle.style.opacity = Math.random() * 0.2 + 0.1;
+
+            
+            const duration = Math.random() * 30 + 20;
+            const delay = Math.random() * 5;
+             const animationName = `float_p14_${i}`; 
+
+            particle.style.animation = `${animationName} ${duration}s ${delay}s infinite linear`;
+
+            particlesContainer.appendChild(particle);
+
+            
+             if (!definedKeyframes.has(animationName)) {
+                const style = document.createElement('style');
+                 const x1=Math.random()*200-100, y1=Math.random()*200-100;
+                 const x2=Math.random()*200-100, y2=Math.random()*200-100;
+                 const x3=Math.random()*200-100, y3=Math.random()*200-100;
+                style.textContent = `
+                    @keyframes ${animationName} {
+                        0% { transform: translate(0, 0); }
+                        25% { transform: translate(${x1}px, ${y1}px); }
+                        50% { transform: translate(${x2}px, ${y2}px); }
+                        75% { transform: translate(${x3}px, ${y3}px); }
+                        100% { transform: translate(0, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+                definedKeyframes.add(animationName);
+            }
+        }
+    </script>
+    
+<script>
+  window.addEventListener('message', function(event) {
+    // Basic check for security and relevance
+    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+      return;
+    }
+    console.log('Slide activated message received in iframe: ' + window.location.pathname);
+    // Add class to body to trigger animations defined in CSS
+    // Remove class first to ensure animation restarts if slide is revisited
+    document.body.classList.remove('animate-in');
+    // Force reflow/repaint might be needed for reliable restart
+    void document.body.offsetWidth;
+    document.body.classList.add('animate-in');
+
+  });
+
+  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
+  // Assumes parent frame loads slide 1 as active initially without sending a message.
+  if (window.location.pathname.endsWith('Untitled-1.html')) {
+     document.addEventListener('DOMContentLoaded', () => {
+         console.log('Initial animation for slide 1');
+         document.body.classList.add('animate-in');
+     });
+  }
+</script>
+</body>
+</html>
