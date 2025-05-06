@@ -34,21 +34,21 @@
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%; 
+            height: 100%;
             font-family: 'Tajawal', sans-serif;
             overflow: hidden;
             direction: rtl;
         }
 
         .slide-container {
-            width: 100%; 
-            height: 100%; 
-            
+            width: 100%;
+            height: 100%;
+
             background: linear-gradient(135deg, #7b0041 0%, #4d0029 100%);
             position: relative;
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .particles-container {
@@ -72,26 +72,28 @@
         .content {
             position: relative;
             z-index: 2;
-            height: 100%; 
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; 
-            padding: clamp(1rem, 3vh, 2rem); 
-            overflow-y: auto; 
+            justify-content: space-between;
+            padding: clamp(1.5rem, 4vh, 2.5rem); /* Increased padding */
+            overflow-y: auto;
         }
 
         .logos {
             display: flex;
             justify-content: space-between;
-            flex-shrink: 0; 
+            flex-shrink: 0;
         }
 
+        /* --- LOGO STYLE (Ensure aspect ratio) --- */
         .logo {
-            height: 100px; /* Increased from clamp */
-            width: auto;
-            max-width: 300px; /* Increased max-width */
+            height: 100px; /* Fixed height */
+            width: auto;   /* Auto width preserves aspect ratio */
+            max-width: 300px; /* Limit maximum width */
             filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
         }
+
 
         .main-content-area {
              flex-grow: 1;
@@ -104,58 +106,73 @@
              text-align: center;
         }
 
+        /* --- INCREASED TEXT SIZE --- */
         .main-heading {
-            font-size: clamp(3.3rem, 9.2vw, 5.5rem); 
+            font-size: clamp(3.5rem, 9.5vw, 6rem); /* Increased size */
             font-weight: 900;
             color: white;
             text-align: center;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem; /* Increased margin */
             text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         }
 
         .conclusion {
-            font-size: clamp(1.32rem, 3.45vw, 1.76rem); 
+            font-size: clamp(1.5rem, 4vw, 2rem); /* Increased size */
             font-weight: 500;
             color: #f8d57e;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto clamp(1rem, 3vh, 2rem); 
-            line-height: 1.5;
+            max-width: 850px; /* Slightly wider */
+            margin: 0 auto clamp(1.5rem, 4vh, 2.5rem); /* Increased margin */
+            line-height: 1.6; /* Better line height */
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
+
+        .team-title {
+            font-size: clamp(1.7rem, 4vw, 2.2rem); /* Increased size */
+            font-weight: 700;
+            color: #f8d57e;
+            text-align: center;
+            margin-bottom: 1.2rem; /* Increased margin */
+        }
+
+
+        .member-name {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem); /* Increased size */
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.2rem;
+        }
+
+        .member-role {
+            font-size: clamp(0.8rem, 1.8vw, 1rem); /* Increased size */
+            color: rgba(255, 255, 255, 0.8);
+        }
+        /* --- END INCREASED TEXT SIZE --- */
 
         .team-container {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: clamp(1rem, 2vw, 1.5rem); 
+            padding: clamp(1.2rem, 2.5vw, 1.8rem); /* Increased padding */
             margin: 0 auto;
             width: 90%;
-            max-width: 900px; 
+            max-width: 950px; /* Slightly wider */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-             flex-shrink: 0; 
-             margin-bottom: 1rem; 
-        }
-
-        .team-title {
-            font-size: clamp(1.54rem, 3.45vw, 1.98rem); 
-            font-weight: 700;
-            color: #f8d57e;
-            text-align: center;
-            margin-bottom: 1rem;
+             flex-shrink: 0;
+             margin-bottom: 1.5rem; /* Increased margin */
         }
 
         .team-members {
             display: grid;
-             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
-            gap: clamp(0.5rem, 1vw, 1rem); 
-            margin-top: 1rem;
+             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Slightly wider min */
+            gap: clamp(0.8rem, 1.5vw, 1.2rem); /* Increased gap */
+            margin-top: 1.2rem; /* Increased margin */
         }
 
         .team-member {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            padding: clamp(0.8rem, 1.5vw, 1rem); 
+            padding: clamp(1rem, 1.8vw, 1.2rem); /* Increased padding */
             text-align: center;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
@@ -166,22 +183,11 @@
         }
 
         .member-icon {
-            font-size: clamp(1.54rem, 3.45vw, 1.98rem); 
+            font-size: clamp(1.7rem, 4vw, 2.2rem); /* Increased icon size */
             color: #f8d57e;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem; /* Increased margin */
         }
 
-        .member-name {
-            font-size: clamp(0.99rem, 2.3vw, 1.32rem); 
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.2rem;
-        }
-
-        .member-role {
-            font-size: clamp(0.77rem, 1.72vw, 0.99rem); 
-            color: rgba(255, 255, 255, 0.8);
-        }
 
         .glow {
             position: absolute;
@@ -201,8 +207,7 @@
             50% { transform: translate(-50%, -50%) translateY(-20px); }
         }
 
-        
-    
+
 /* Element Entrance Animations */
 .logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
   opacity: 0;
@@ -294,163 +299,100 @@ body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:
                     </div>
                 </div>
 
-                
-                
+
+
             </div>
         </div>
 
         <script>
-        
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 80; 
-        const definedKeyframes = new Set(); 
+        // Simple particle generation (fallback)
+        function createSimpleParticles() {
+             const particlesContainer = document.createElement('div');
+             particlesContainer.className = 'particles-container';
+             particlesContainer.id = 'particles';
+             document.querySelector('.slide-container').insertBefore(particlesContainer, document.querySelector('.content'));
+             const particleCount = 80; // More particles for final slide
+             const definedKeyframes = new Set();
 
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
+             for (let i = 0; i < particleCount; i++) {
+                 const particle = document.createElement('div');
+                 particle.classList.add('particle');
+                 const size = Math.random() * 4 + 1; // Smaller particles
+                 particle.style.width = `${size}px`;
+                 particle.style.height = `${size}px`;
+                 particle.style.left = `${Math.random() * 100}%`;
+                 particle.style.top = `${Math.random() * 100}%`;
+                 particle.style.opacity = Math.random() * 0.4 + 0.2; // Slightly more visible
+                 const duration = Math.random() * 20 + 12; // Moderate speed
+                 const delay = Math.random() * 7;
+                 const animationName = `float_p15_${i}`;
+                 particle.style.animation = `${animationName} ${duration}s ${delay}s infinite ease-in-out alternate`;
+                 particlesContainer.appendChild(particle);
 
-            const size = Math.random() * 5 + 1;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-
-            
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-
-            
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-
-            
-            const duration = Math.random() * 20 + 10;
-            const delay = Math.random() * 5;
-            const animationName = `float_p15_${i}`; 
-
-            particle.style.animation = `${animationName} ${duration}s ${delay}s infinite ease-in-out`;
-
-            particlesContainer.appendChild(particle);
-
-             
-             if (!definedKeyframes.has(animationName)) {
-                const style = document.createElement('style');
-                 const x1=Math.random()*80-40, y1=Math.random()*80-40; 
-                 const x2=Math.random()*80-40, y2=Math.random()*80-40;
-                style.textContent = `
-                    @keyframes ${animationName} {
-                        0%, 100% { transform: translate(0, 0); }
-                        50% { transform: translate(${x1}px, ${y1}px); }
-                        75% { transform: translate(${x2}px, ${y2}px); } 
-                    }
-                `;
-                document.head.appendChild(style);
-                definedKeyframes.add(animationName);
+                 if (!definedKeyframes.has(animationName)) {
+                     const style = document.createElement('style');
+                     const x1 = Math.random() * 70 - 35; // Moderate range
+                     const y1 = Math.random() * 70 - 35;
+                     style.textContent = `
+                         @keyframes ${animationName} {
+                             0% { transform: translate(0, 0); }
+                             100% { transform: translate(${x1}px, ${y1}px); }
+                         }
+                     `;
+                     document.head.appendChild(style);
+                     definedKeyframes.add(animationName);
+                 }
              }
-        }
-    </script>
-    
-<script>
-  window.addEventListener('message', function(event) {
-    // Basic check for security and relevance
-    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
-      return;
-    }
-    console.log('Slide activated message received in iframe: ' + window.location.pathname);
-    // Add class to body to trigger animations defined in CSS
-    // Remove class first to ensure animation restarts if slide is revisited
-    document.body.classList.remove('animate-in');
-    // Force reflow/repaint might be needed for reliable restart
-    void document.body.offsetWidth;
-    document.body.classList.add('animate-in');
+         }
 
-  });
 
-  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
-  // Assumes parent frame loads slide 1 as active initially without sending a message.
-  if (window.location.pathname.endsWith('Untitled-1.html')) {
-     document.addEventListener('DOMContentLoaded', () => {
-         console.log('Initial animation for slide 1');
-         document.body.classList.add('animate-in');
-     });
-  }
-</script>
-</body>
-</html>
-        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-        <script>
-        
-        
-
-        
         document.addEventListener("DOMContentLoaded", function() {
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": false,
-                        "anim": {
-                            "enable": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#f8d57e",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "repulse"
-                        },
-                        "onclick": {
-                            "enable": false
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "repulse": {
-                            "distance": 100,
-                            "duration": 0.4
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS("particles-js", { /* particles.js config */
+                     "particles": {
+                         "number": { "value": 100, "density": { "enable": true, "value_area": 800 }}, // More particles
+                         "color": { "value": "#ffffff" },
+                         "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }},
+                         "opacity": { "value": 0.6, "random": true, "anim": { "enable": true, "speed": 0.8, "opacity_min": 0.2, "sync": false }}, // Opacity animation
+                         "size": { "value": 3.5, "random": true, "anim": { "enable": true, "speed": 3, "size_min": 0.5, "sync": false }}, // Size animation
+                         "line_linked": { "enable": true, "distance": 130, "color": "#f8d57e", "opacity": 0.5, "width": 1 }, // Slightly denser lines
+                         "move": { "enable": true, "speed": 2.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false }} // Slightly faster, random move
+                     },
+                     "interactivity": {
+                         "detect_on": "canvas",
+                         "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, // Added grab and push
+                         "modes": {
+                            "grab": {"distance": 140, "line_linked": {"opacity": 1}},
+                             "bubble": {"distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3},
+                            "repulse": { "distance": 120, "duration": 0.4 }, // Slightly increased repulse distance
+                            "push": {"particles_nb": 4},
+                            "remove": {"particles_nb": 2}
+                         }
+                     },
+                     "retina_detect": true
+                });
+            } else {
+                 console.warn("particles.js not loaded, using fallback simple particles.");
+                 createSimpleParticles();
+            }
+
+             // Animation Trigger Logic
+             window.addEventListener('message', function(event) {
+                 // Basic check for security and relevance
+                 if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+                     return;
+                 }
+
+                 console.log('Slide activated message RECEIVED in iframe: ' + window.location.pathname);
+
+                 document.body.classList.remove('animate-in');
+                 void document.body.offsetWidth; // Reflow
+                 document.body.classList.add('animate-in');
+                 
+                 console.log('Added animate-in class to body in:', window.location.pathname);
+             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</body>
+</html>

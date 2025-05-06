@@ -23,7 +23,7 @@
             --text-color: #333333;
             --light-text-color: #ffffff;
             --shadow-color: rgba(123, 0, 65, 0.15);
-            --transition-speed: 0.6s;
+            --transition-speed: 0.6s; /* Adjusted speed */
             --border-radius: 10px;
         }
 
@@ -34,75 +34,48 @@
             height: 100%;
             font-family: 'Tajawal', sans-serif;
             direction: rtl;
-            overflow: hidden; 
-            background-color: var(--secondary-color); 
+            overflow: hidden;
+            background-color: var(--secondary-color);
         }
 
         /* Fullscreen Slides Container */
         .slides-container {
-            width: 100vw; 
-            height: 100vh; 
-            position: relative; 
-            overflow: hidden; 
-            background-color: #000; 
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-color: #000; /* User mentioned black screen, this is the container bg */
         }
 
+        /* --- SIMPLE SLIDE TRANSITION --- */
         .slide-iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none; 
-            opacity: 1; /* Default to visible, transform will handle hiding */
-            transform: translateX(100%); /* Start off-screen to the right */
-            transition: transform var(--transition-speed) cubic-bezier(0.645, 0.045, 0.355, 1), opacity var(--transition-speed) cubic-bezier(0.645, 0.045, 0.355, 1); 
-            pointer-events: none; 
+            border: none;
+            /* Initial state is set by JS, but CSS provides transition capability */
+            /* opacity: 0; */ /* Default opacity set by JS */
+            /* transform: translateX(100%); */ /* Default transform set by JS */
+            transition: transform var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out;
+            pointer-events: none; /* Initially not interactive, active class changes this */
+            background-color: #fff; /* iframe background, should prevent seeing container bg if opaque */
         }
 
         .slide-iframe.active {
-            transform: translateX(0%); /* Active slide in view */
-            opacity: 1;
-            z-index: 1; 
-            pointer-events: auto; 
+            /* transform: translateX(0%); */ /* Active transform set by JS */
+            /* opacity: 1; */ /* Active opacity set by JS */
+            z-index: 1; /* Ensure active slide is on top */
+            pointer-events: auto;
         }
-
-        .slide-iframe.slide-out-left {
-            transform: translateX(-100%); /* Slide out to the left */
-            opacity: 0;
-        }
-
-        .slide-iframe.slide-out-right {
-            transform: translateX(100%); /* Slide out to the right (already default for new) */
-            opacity: 0;
-        }
-
-        .slide-iframe.slide-in-left {
-            transform: translateX(0%); /* Coming from left */
-            opacity: 1;
-        }
-        .slide-iframe.slide-in-right {
-            transform: translateX(0%); /* Coming from right */
-            opacity: 1;
-        }
-
-        /* Pre-position for animation */
-        .slide-iframe.next-slide-to-enter {
-            transform: translateX(100%); /* Position for sliding in from right */
-            opacity: 1; /* Keep it opaque during transition setup */
-        }
-        .slide-iframe.prev-slide-to-enter {
-            transform: translateX(-100%); /* Position for sliding in from left */
-            opacity: 1; /* Keep it opaque during transition setup */
-        }
-
-        /* --- Styles adopted from slides.html / main.css --- */
+        /* --- END SIMPLE SLIDE TRANSITION --- */
 
         /* Back to Site Button */
         .back-to-site {
             position: fixed;
-            bottom: 30px; /* Changed from top: 25px */
-            left: 25px; /* Positioned bottom-left */
+            bottom: 30px;
+            left: 25px;
             background: rgba(255, 255, 255, 0.9);
             padding: 10px 20px;
             border-radius: 25px;
@@ -116,11 +89,9 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
-            direction: ltr; 
+            direction: ltr;
         }
-        .back-to-site i { /* Style for icon within the button */
-             margin-right: 8px; /* Space between icon and text */
-        }
+        .back-to-site i { margin-right: 8px; }
         .back-to-site:hover {
             background: var(--primary-color);
             color: white;
@@ -129,7 +100,7 @@
         }
 
         /* Slide Indicator */
-        .slide-indicator-wrapper { /* Renamed from .slide-indicator in slides.html */
+        .slide-indicator-wrapper {
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -141,7 +112,7 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             z-index: 100;
             color: var(--primary-color);
-            direction: ltr; /* Keep indicator LTR */
+            direction: ltr;
         }
 
         /* Progress Bar */
@@ -152,27 +123,27 @@
             height: 5px;
             background: var(--primary-color);
             transition: width 0.3s ease;
-            z-index: 101; /* Above navigation */
-            width: 0%; /* Initial width */
+            z-index: 101;
+            width: 0%;
         }
 
         /* Navigation Buttons Container */
         .navigation {
             position: fixed;
-            bottom: 30px; /* Same level as indicator */
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px; /* Space between buttons */
+            gap: 15px;
             z-index: 100;
-            direction: ltr; /* Keep LTR for Previous/Next order */
+            direction: ltr;
         }
 
         /* Individual Navigation Button */
         .nav-btn {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(123, 0, 65, 0.2);
-            border-radius: 50%; /* Circular */
+            border-radius: 50%;
             width: 50px;
             height: 50px;
             display: flex;
@@ -182,7 +153,7 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             color: var(--primary-color);
-            font-size: 1.2rem; /* Icon size */
+            font-size: 1.2rem;
         }
         .nav-btn:hover {
             background: var(--primary-color);
@@ -190,7 +161,6 @@
             transform: scale(1.1);
             box-shadow: 0 5px 15px var(--shadow-color);
         }
-         /* Disabled state */
         .nav-btn:disabled {
              background-color: #ccc;
              color: #666;
@@ -204,193 +174,198 @@
     </head>
     <body>
 
-        <!-- Back to Website Link -->
         <a href="index.html" class="back-to-site">
-            <i class="fas fa-arrow-left"></i>
-            <!-- Changed arrow direction for LTR button -->
-            العودة للموقع
+            <i class="fas fa-arrow-left"></i> العودة للموقع
         </a>
-
-        <!-- Slide Indicator -->
         <div class="slide-indicator-wrapper">
-            <span id="current-slide">1</span> / <span
-                id="total-slides">15</span>
+            <span id="current-slide">1</span> / <span id="total-slides">15</span>
         </div>
-
-        <!-- Progress Bar -->
         <div class="progress-bar" id="slide-progress"></div>
 
-        <!-- Slides Container -->
         <div class="slides-container">
-            <!-- Iframes with relative paths -->
-            <iframe class='slide-iframe active' id='slide-iframe-1'
-                src='Untitled-1.html' title='Slide 1'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-2'
-                src='Untitled-2.html' title='Slide 2'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-3'
-                src='Untitled-3.html' title='Slide 3'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-4'
-                src='Untitled-4.html' title='Slide 4'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-5'
-                src='Untitled-5.html' title='Slide 5'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-6'
-                src='Untitled-6.html' title='Slide 6'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-7'
-                src='Untitled-7.html' title='Slide 7'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-8'
-                src='Untitled-8.html' title='Slide 8'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-9'
-                src='Untitled-9.html' title='Slide 9'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-10'
-                src='Untitled-10.html' title='Slide 10'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-11'
-                src='Untitled-11.html' title='Slide 11'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-12'
-                src='Untitled-12.html' title='Slide 12'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-13'
-                src='Untitled-13.html' title='Slide 13'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-14'
-                src='Untitled-14.html' title='Slide 14'></iframe>
-            <iframe class='slide-iframe' id='slide-iframe-15'
-                src='Untitled-15.html' title='Slide 15'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-1' src='Untitled-1.html' title='Slide 1'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-2' src='Untitled-2.html' title='Slide 2'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-3' src='Untitled-3.html' title='Slide 3'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-4' src='Untitled-4.html' title='Slide 4'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-5' src='Untitled-5.html' title='Slide 5'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-6' src='Untitled-6.html' title='Slide 6'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-7' src='Untitled-7.html' title='Slide 7'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-8' src='Untitled-8.html' title='Slide 8'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-9' src='Untitled-9.html' title='Slide 9'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-10' src='Untitled-10.html' title='Slide 10'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-11' src='Untitled-11.html' title='Slide 11'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-12' src='Untitled-12.html' title='Slide 12'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-13' src='Untitled-13.html' title='Slide 13'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-14' src='Untitled-14.html' title='Slide 14'></iframe>
+            <iframe class='slide-iframe' id='slide-iframe-15' src='Untitled-15.html' title='Slide 15'></iframe>
         </div>
 
-        <!-- Navigation Buttons (using new classes/IDs) -->
         <div class="navigation">
-            <button class="nav-btn" id="prev-slide" onclick="changeSlide(-1)"
-                aria-label="Previous Slide">
+            <button class="nav-btn" id="prev-slide" onclick="changeSlide(-1)" aria-label="Previous Slide">
                 <i class="fas fa-chevron-left"></i>
-                <!-- Left arrow for Previous -->
             </button>
-            <button class="nav-btn" id="next-slide" onclick="changeSlide(1)"
-                aria-label="Next Slide">
+            <button class="nav-btn" id="next-slide" onclick="changeSlide(1)" aria-label="Next Slide">
                 <i class="fas fa-chevron-right"></i>
-                <!-- Right arrow for Next -->
             </button>
         </div>
 
         <script>
-        let currentSlide = 1;
-        let totalSlides = 0; 
-        const slideIframes = document.querySelectorAll(".slide-iframe");
-        const prevBtn = document.getElementById("prev-slide");
-        const nextBtn = document.getElementById("next-slide");
-        const currentSlideIndicator = document.getElementById("current-slide");
-        const totalSlideIndicator = document.getElementById("total-slides");
-        const progressBar = document.getElementById("slide-progress");
-        let isAnimating = false; 
+            let currentSlide = 1;
+            let totalSlides = 0;
+            const slideIframes = document.querySelectorAll(".slide-iframe");
+            const prevBtn = document.getElementById("prev-slide");
+            const nextBtn = document.getElementById("next-slide");
+            const currentSlideIndicator = document.getElementById("current-slide");
+            const totalSlideIndicator = document.getElementById("total-slides");
+            const progressBar = document.getElementById("slide-progress");
+            let isAnimating = false;
+            let transitionDuration = 600; // Default, will be updated from CSS
 
-        function showSlide(newSlideNumber, direction) {
-            if (isAnimating || newSlideNumber < 1 || newSlideNumber > totalSlides || newSlideNumber === currentSlide) {
-                return;
-            }
-            isAnimating = true;
-
-            const oldSlideIndex = currentSlide - 1;
-            const newSlideIndex = newSlideNumber - 1;
-
-            const currentActiveIframe = slideIframes[oldSlideIndex];
-            const nextActiveIframe = slideIframes[newSlideIndex];
-
-            
-            slideIframes.forEach(iframe => {
-                iframe.classList.remove("active", "slide-out-left", "slide-out-right", "slide-in-left", "slide-in-right", "next-slide-to-enter", "prev-slide-to-enter");
-            });
-
-            if (direction === 1) { // Moving to next slide (new slide comes from right)
-                if(currentActiveIframe) currentActiveIframe.classList.add("slide-out-left");
-                nextActiveIframe.classList.add("next-slide-to-enter"); 
-            } else { // Moving to previous slide (new slide comes from left)
-                if(currentActiveIframe) currentActiveIframe.classList.add("slide-out-right");
-                nextActiveIframe.classList.add("prev-slide-to-enter"); 
-            }
-            
-            // Force reflow to ensure the pre-animation state is applied before transition starts
-            void nextActiveIframe.offsetWidth;
-
-            // Add active class to trigger animation
-            nextActiveIframe.classList.add("active");
-            if (direction === 1) {
-                nextActiveIframe.classList.add("slide-in-right");
-            } else {
-                nextActiveIframe.classList.add("slide-in-left");
-            }
-
-            // Send a message to the iframe that it is now active
-            if (nextActiveIframe.contentWindow) {
-                nextActiveIframe.contentWindow.postMessage({ type: "slideActivated" }, "*");
-            }
-            
-            // Update indicators and buttons
-            currentSlideIndicator.textContent = newSlideNumber;
-            prevBtn.disabled = newSlideNumber === 1;
-            nextBtn.disabled = newSlideNumber === totalSlides;
-            if(progressBar && totalSlides > 0) {
-                 const percentage = (newSlideNumber / totalSlides) * 100;
-                 progressBar.style.width = percentage + "%";
-            }
-
-            currentSlide = newSlideNumber;
-
-            // Reset animation flag after transition ends
-            // Use the transition duration from CSS (var(--transition-speed))
-            // Assuming --transition-speed is 0.6s = 600ms
-            setTimeout(() => {
-                isAnimating = false;
-                // Clean up animation classes from the old slide after it has transitioned out
-                if(currentActiveIframe && currentActiveIframe !== nextActiveIframe) {
-                    currentActiveIframe.classList.remove("slide-out-left", "slide-out-right");
+            function sendMessageToIframe(iframe, slideNumber) {
+                if (iframe && iframe.contentWindow) {
+                    console.log(`Sending slideActivated to iframe ${slideNumber}`);
+                    iframe.contentWindow.postMessage({ type: "slideActivated" }, "*");
+                    return true;
+                } else {
+                    setTimeout(() => {
+                        if (iframe && iframe.contentWindow) {
+                            iframe.contentWindow.postMessage({ type: "slideActivated" }, "*");
+                            console.log(`Sending slideActivated to iframe ${slideNumber} (retry)`);
+                        } else {
+                            console.warn(`Cannot access contentWindow for iframe ${slideNumber} even after retry.`);
+                        }
+                    }, 100);
+                    return false;
                 }
-                 // Clean up animation classes from the new slide after it has transitioned in
-                nextActiveIframe.classList.remove("slide-in-left", "slide-in-right", "next-slide-to-enter", "prev-slide-to-enter");
-            }, 600); // Match --transition-speed
-        }
-
-        function changeSlide(direction) {
-            const newSlide = currentSlide + direction;
-            if (newSlide >= 1 && newSlide <= totalSlides) {
-                showSlide(newSlide, direction);
-            }
-        }
-
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            console.log("Iframe slides: DOMContentLoaded event fired.");
-
-            totalSlides = slideIframes.length; 
-
-            if (totalSlides > 0) {
-                 console.log(`Found ${totalSlides} iframe slides.`);
-                 totalSlideIndicator.textContent = totalSlides; 
-                 
-                 // Initial setup for the very first slide (no animation, just make it active)
-                 slideIframes.forEach(iframe => iframe.classList.remove("active", "slide-out-left", "slide-out-right", "slide-in-left", "slide-in-right", "next-slide-to-enter", "prev-slide-to-enter"));
-                 slideIframes[0].style.transform = "translateX(0%)"; // Ensure first slide is in position
-                 slideIframes[0].classList.add("active");
-                 currentSlideIndicator.textContent = 1;
-                 prevBtn.disabled = true;
-                 nextBtn.disabled = totalSlides === 1;
-                 if(progressBar) progressBar.style.width = (1 / totalSlides) * 100 + "%";
-
-            } else {
-                 console.error("Iframe slides: No slide iframes found!");
-                 currentSlideIndicator.textContent = "0";
-                 totalSlideIndicator.textContent = "0";
-                 prevBtn.disabled = true;
-                 nextBtn.disabled = true;
-                 if(progressBar) progressBar.style.width = "0%";
             }
 
-            
-            document.addEventListener("keydown", function(e) {
-                if (e.key === "ArrowRight" || e.key === "PageDown") {
-                    changeSlide(1);
-                } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
-                    changeSlide(-1);
+            function showSlide(newSlideNumber, direction) {
+                if (isAnimating || newSlideNumber < 1 || newSlideNumber > totalSlides || newSlideNumber === currentSlide) {
+                    return;
                 }
-            });
-        });
-    </script>
+                console.log(`Attempting to show slide: ${newSlideNumber}, Direction: ${direction}`);
+                isAnimating = true;
 
+                const oldSlideIndex = currentSlide - 1;
+                const newSlideIndex = newSlideNumber - 1;
+                const currentIframe = slideIframes[oldSlideIndex];
+                const nextIframe = slideIframes[newSlideIndex];
+
+                // 1. Prepare the NEXT slide (position it correctly off-screen, ready to animate in)
+                nextIframe.style.transition = 'none'; // No transition for this setup
+                if (direction === 1) { // Moving forward, next slide starts from the right
+                    nextIframe.style.transform = 'translateX(100%)';
+                } else { // Moving backward, next slide starts from the left
+                    nextIframe.style.transform = 'translateX(-100%)';
+                }
+                nextIframe.style.opacity = '0'; // Explicitly set opacity to 0 before animation
+                nextIframe.classList.remove('active'); // Ensure it's not active yet
+                void nextIframe.offsetWidth; // Force reflow
+                nextIframe.style.transition = ''; // Re-enable CSS transitions (from .slide-iframe class)
+
+                // 2. Animate OUT the CURRENT slide
+                if (currentIframe) {
+                    currentIframe.classList.remove('active'); 
+                    if (direction === 1) { // Current slide exits to the left
+                        currentIframe.style.transform = 'translateX(-100%)';
+                    } else { // Current slide exits to the right
+                        currentIframe.style.transform = 'translateX(100%)'; 
+                    }
+                    // Opacity will transition to 0 based on .slide-iframe style when .active is removed.
+                }
+
+                // 3. Animate IN the NEXT slide
+                setTimeout(() => { // Short delay for setup and to allow 'out' animation to start
+                    nextIframe.style.opacity = '1';         // Target opacity for animation
+                    nextIframe.style.transform = 'translateX(0%)'; // Target transform for animation
+                    nextIframe.classList.add('active');   // Add active class for z-index, pointer-events, and state
+                    sendMessageToIframe(nextIframe, newSlideNumber);
+                }, 20); // Adjusted delay to ensure styles apply before transition
+
+                currentSlide = newSlideNumber;
+                currentSlideIndicator.textContent = newSlideNumber;
+                prevBtn.disabled = newSlideNumber === 1;
+                nextBtn.disabled = newSlideNumber === totalSlides;
+                if (progressBar && totalSlides > 0) {
+                    const percentage = (newSlideNumber / totalSlides) * 100;
+                    progressBar.style.width = percentage + "%";
+                }
+
+                // 4. Reset animation flag and clean up old slide's inline styles after transition
+                setTimeout(() => {
+                    isAnimating = false;
+                    if (currentIframe) {
+                        currentIframe.style.transition = 'none';
+                        currentIframe.style.opacity = '0'; 
+                        currentIframe.style.transform = 'translateX(100%)'; // Default hidden
+                        currentIframe.classList.remove('active'); // Ensure it's fully reset
+                        void currentIframe.offsetWidth;
+                        currentIframe.style.transition = '';
+                    }
+                }, transitionDuration + 50); 
+            }
+
+            function changeSlide(direction) {
+                const newSlide = currentSlide + direction;
+                if (newSlide >= 1 && newSlide <= totalSlides) {
+                    showSlide(newSlide, direction);
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                totalSlides = slideIframes.length;
+                const durationStr = getComputedStyle(document.documentElement).getPropertyValue('--transition-speed');
+                if (durationStr) {
+                    const parsedDuration = parseFloat(durationStr.trim());
+                    if (!isNaN(parsedDuration)) {
+                        transitionDuration = parsedDuration * 1000; // Convert s to ms
+                    }
+                }
+                console.log(`Using transition duration: ${transitionDuration}ms`);
+
+                if (totalSlides > 0) {
+                    totalSlideIndicator.textContent = totalSlides;
+                    slideIframes.forEach((iframe, index) => {
+                        iframe.style.transition = 'none'; // Disable transitions for initial setup
+                        if (index === 0) {
+                            iframe.style.opacity = '1';
+                            iframe.style.transform = 'translateX(0%)';
+                            iframe.classList.add("active");
+                            // pointerEvents is handled by .active class
+                            setTimeout(() => sendMessageToIframe(iframe, 1), 200);
+                        } else {
+                            iframe.style.opacity = '0';
+                            iframe.style.transform = 'translateX(100%)'; // Default hidden position
+                            iframe.classList.remove("active");
+                            // pointerEvents is handled by .slide-iframe (not .active) style
+                        }
+                        void iframe.offsetWidth; // Reflow
+                        iframe.style.transition = ''; // Re-enable CSS transitions
+                    });
+
+                    currentSlideIndicator.textContent = 1;
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = totalSlides === 1;
+                    if (progressBar) progressBar.style.width = (1 / totalSlides) * 100 + "%";
+                } else {
+                    console.error("Iframe slides: No slide iframes found!");
+                    currentSlideIndicator.textContent = "0";
+                    totalSlideIndicator.textContent = "0";
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = true;
+                    if (progressBar) progressBar.style.width = "0%";
+                }
+
+                document.addEventListener("keydown", function(e) {
+                    if (!isAnimating) { // Check isAnimating flag before changing slide
+                        if (e.key === "ArrowRight" || e.key === "PageDown") {
+                            changeSlide(1);
+                        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+                            changeSlide(-1);
+                        }
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

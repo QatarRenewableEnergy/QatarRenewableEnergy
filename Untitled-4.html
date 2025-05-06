@@ -375,19 +375,20 @@ body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:
     </script>
     
 <script>
+  // Animation Trigger Logic
   window.addEventListener('message', function(event) {
     // Basic check for security and relevance
     if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
       return;
     }
-    console.log('Slide activated message received in iframe: ' + window.location.pathname);
-    // Add class to body to trigger animations defined in CSS
-    // Remove class first to ensure animation restarts if slide is revisited
-    document.body.classList.remove('animate-in');
-    // Force reflow/repaint might be needed for reliable restart
-    void document.body.offsetWidth;
-    document.body.classList.add('animate-in');
 
+    console.log('Slide activated message RECEIVED in iframe: ' + window.location.pathname);
+
+    document.body.classList.remove('animate-in');
+    void document.body.offsetWidth; // Reflow
+    document.body.classList.add('animate-in');
+    
+    console.log('Added animate-in class to body in:', window.location.pathname);
   });
 
   // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)

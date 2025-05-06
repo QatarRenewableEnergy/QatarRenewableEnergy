@@ -26,21 +26,21 @@
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%; 
+            height: 100%;
             font-family: 'Tajawal', sans-serif;
             overflow: hidden;
             direction: rtl;
         }
 
         .slide-container {
-            width: 100%;  
-            height: 100%; 
-            
+            width: 100%;
+            height: 100%;
+
             background: linear-gradient(135deg, #7b0041 0%, #4d0029 100%);
             position: relative;
             overflow: hidden;
-            display: flex; 
-            flex-direction: column; 
+            display: flex;
+            flex-direction: column;
         }
 
         .particles-container {
@@ -64,29 +64,31 @@
         .content {
             position: relative;
             z-index: 2;
-            height: 100%; 
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; 
+            justify-content: space-between;
             padding: 2rem;
-            flex-grow: 1; 
+            flex-grow: 1;
         }
 
         .logos {
             display: flex;
             justify-content: space-between;
-            flex-shrink: 0; 
+            flex-shrink: 0;
         }
 
+        /* --- LOGO STYLE (Ensure aspect ratio) --- */
         .logo {
-            height: 100px; /* Increased from 60px */
-            width: auto;
-            max-width: 300px; /* Increased max-width */
+            height: 100px; /* Fixed height */
+            width: auto;   /* Auto width preserves aspect ratio */
+            max-width: 300px; /* Limit maximum width */
             filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
         }
 
+        /* --- INCREASED TEXT SIZE --- */
         .main-title {
-            font-size: clamp(2.75rem, 6.9vw, 4.95rem); 
+            font-size: clamp(3rem, 7.5vw, 5.5rem); /* Increased size */
             font-weight: 900;
             color: white;
             text-align: center;
@@ -96,7 +98,7 @@
         }
 
         .subtitle {
-            font-size: clamp(1.65rem, 4.6vw, 2.75rem); 
+            font-size: clamp(1.8rem, 5vw, 3rem); /* Increased size */
             font-weight: 700;
             color: #f8d57e;
             text-align: center;
@@ -105,12 +107,22 @@
         }
 
         .authors {
-            font-size: clamp(1.1rem, 2.88vw, 1.65rem); 
+            font-size: clamp(1.2rem, 3vw, 1.8rem); /* Increased size */
             font-weight: 500;
             color: white;
             text-align: center;
             margin-top: 2rem;
         }
+
+        .footer-prompt {
+            text-align: center;
+            color: white;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem); /* Increased size */
+            padding-bottom: 1rem;
+            flex-shrink: 0;
+        }
+        /* --- END INCREASED TEXT SIZE --- */
+
 
         .glow {
             position: absolute;
@@ -122,6 +134,7 @@
             filter: blur(30px);
             transform: translate(-50%, -50%);
             animation: float 8s infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -129,14 +142,7 @@
             50% { transform: translate(-50%, -50%) translateY(-20px); }
         }
 
-         
-        .footer-prompt {
-            text-align: center;
-            color: white;
-            font-size: clamp(1.1rem, 2.3vw, 1.32rem); 
-            padding-bottom: 1rem; 
-            flex-shrink: 0; 
-        }
+
          .footer-prompt i {
              margin: 0 0.5rem;
              animation: bounce 1.5s infinite;
@@ -146,7 +152,7 @@
            40% {transform: translateY(-8px);}
            60% {transform: translateY(-4px);}
         }
-    
+
 /* Element Entrance Animations */
 .logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
   opacity: 0;
@@ -204,7 +210,7 @@ body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:
 
                 <div
                     class="flex-grow flex flex-col items-center justify-center py-6 md:py-12">
-                    
+
                     <h1 class="main-title">من الوقود الأحفوري<br>إلى الطاقة
                         المتجددة</h1>
                     <h2 class="subtitle">قطر نحو مستقبل مستدام - رؤية 2030</h2>
@@ -212,158 +218,92 @@ body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:
                 </div>
 
                 <div class="footer-prompt">
-                    <i class="fas fa-chevron-down"></i> 
+                    <i class="fas fa-chevron-down"></i>
                     انقر أو استخدم الأسهم للانتقال للشريحة التالية
-                    <i class="fas fa-chevron-down"></i> 
+                    <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
         </div>
 
         <script>
-        
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 50;
+        // Simple particle generation (fallback if particles.js fails or not loaded)
+        function createSimpleParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'particles-container';
+            particlesContainer.id = 'particles'; // Assign ID for potential styling
+            document.querySelector('.slide-container').insertBefore(particlesContainer, document.querySelector('.content'));
 
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
+            const particleCount = 50; // Keep particle count reasonable
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 4 + 1; // Smaller particles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.opacity = Math.random() * 0.4 + 0.1; // Less opaque
+                const duration = Math.random() * 25 + 15; // Slower animation
+                const delay = Math.random() * 8;
+                particle.style.animation = `floatParticle ${duration}s ${delay}s infinite ease-in-out alternate`; // Alternate direction
+                particlesContainer.appendChild(particle);
+            }
 
-            const size = Math.random() * 5 + 1;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-
-            
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-
-            
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
-
-            
-            const duration = Math.random() * 20 + 10;
-            const delay = Math.random() * 5;
-
-            particle.style.animation = `floatParticle ${duration}s ${delay}s infinite ease-in-out`; 
-
-            particlesContainer.appendChild(particle);
+            // Add keyframes if not already present
+            if (!document.styleSheets[0].cssRules.namedItem('floatParticle')) {
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes floatParticle {
+                        0% { transform: translate(0, 0); }
+                        100% { transform: translate(${Math.random() * 60 - 30}px, ${Math.random() * 60 - 30}px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
         }
-         
-         if (!document.styleSheets[0].cssRules.namedItem('floatParticle')) {
-             const style = document.createElement('style');
-             style.textContent = `
-                 @keyframes floatParticle {
-                     0%, 100% { transform: translate(0, 0); }
-                     50% { transform: translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px); }
-                 }
-             `;
-             document.head.appendChild(style);
-         }
-    </script>
-    
-<script>
-  window.addEventListener('message', function(event) {
-    // Basic check for security and relevance
-    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
-      return;
-    }
-    console.log('Slide activated message received in iframe: ' + window.location.pathname);
-    // Add class to body to trigger animations defined in CSS
-    // Remove class first to ensure animation restarts if slide is revisited
-    document.body.classList.remove('animate-in');
-    // Force reflow/repaint might be needed for reliable restart
-    void document.body.offsetWidth;
-    document.body.classList.add('animate-in');
 
-  });
-
-  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
-  // Assumes parent frame loads slide 1 as active initially without sending a message.
-  if (window.location.pathname.endsWith('Untitled-1.html')) {
-     document.addEventListener('DOMContentLoaded', () => {
-         console.log('Initial animation for slide 1');
-         document.body.classList.add('animate-in');
-     });
-  }
-</script>
-</body>
-</html>
-        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-        <script>
-        
-        
-
-        
+        // Attempt to load particles.js, fallback to simple particles
         document.addEventListener("DOMContentLoaded", function() {
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
+            if (typeof particlesJS !== 'undefined') {
+                 particlesJS("particles-js", { /* particles.js config from original file */
+                    "particles": {
+                        "number": { "value": 80, "density": { "enable": true, "value_area": 800 }},
+                        "color": { "value": "#ffffff" },
+                        "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }},
+                        "opacity": { "value": 0.5, "random": false, "anim": { "enable": false }},
+                        "size": { "value": 3, "random": true, "anim": { "enable": false }},
+                        "line_linked": { "enable": true, "distance": 150, "color": "#f8d57e", "opacity": 0.4, "width": 1 },
+                        "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
                     },
-                    "color": {
-                        "value": "#ffffff"
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": false }, "resize": true },
+                        "modes": { "repulse": { "distance": 100, "duration": 0.4 } }
                     },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": false,
-                        "anim": {
-                            "enable": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#f8d57e",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "repulse"
-                        },
-                        "onclick": {
-                            "enable": false
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "repulse": {
-                            "distance": 100,
-                            "duration": 0.4
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
+                    "retina_detect": true
+                });
+            } else {
+                console.warn("particles.js not loaded, using fallback simple particles.");
+                 createSimpleParticles(); // Use fallback
+            }
+
+            // --- Animation Trigger Logic ---
+            // Listen for message from parent frame
+            window.addEventListener('message', function(event) {
+                if (event.source === window.parent && event.data && event.data.type === 'slideActivated') {
+                    console.log('Slide 1 activated message received.');
+                    document.body.classList.remove('animate-in');
+                    void document.body.offsetWidth; // Reflow
+                    document.body.classList.add('animate-in');
+                }
+             });
+
+             // Trigger animation on initial load specifically for slide 1
+             console.log('Initial animation check for slide 1');
+             document.body.classList.add('animate-in');
+
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</body>
+</html>

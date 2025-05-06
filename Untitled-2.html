@@ -26,20 +26,20 @@
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%; 
+            height: 100%;
             font-family: 'Tajawal', sans-serif;
             overflow: hidden;
             direction: rtl;
         }
 
         .slide-container {
-            width: 100%; 
-            height: 100%; 
-            
+            width: 100%;
+            height: 100%;
+
             background: linear-gradient(135deg, #a3005c 0%, #f5f0e6 100%);
             position: relative;
-            overflow: hidden; 
-            display: flex; 
+            overflow: hidden;
+            display: flex;
             flex-direction: column;
         }
 
@@ -64,49 +64,65 @@
         .content {
             position: relative;
             z-index: 2;
-            height: 100%; 
+            height: 100%;
             display: flex;
             flex-direction: column;
-            padding: clamp(1rem, 4vh, 2rem); 
-            overflow-y: auto; 
+            padding: clamp(1.5rem, 5vh, 2.5rem); /* Increased padding */
+            overflow-y: auto;
         }
 
+        /* --- INCREASED TEXT SIZE --- */
         .main-heading {
-            font-size: clamp(2.2rem, 6.9vw, 3.85rem); 
+            font-size: clamp(2.5rem, 7.5vw, 4.2rem); /* Increased size */
             font-weight: 700;
             color: #7b0041;
             text-align: center;
-            margin-bottom: clamp(1rem, 4vh, 2rem);
+            margin-bottom: clamp(1.5rem, 5vh, 2.5rem); /* Increased margin */
             text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
-            flex-shrink: 0; 
+            flex-shrink: 0;
         }
+
+        .content-icon {
+            font-size: clamp(1.5rem, 4vw, 2.2rem); /* Increased icon size */
+            margin-left: 1.2rem; /* Increased margin */
+            color: #7b0041;
+            flex-shrink: 0;
+        }
+
+        .content-text {
+            font-size: clamp(1.2rem, 3.2vw, 1.7rem); /* Increased text size */
+            font-weight: 700;
+            color: #333;
+        }
+         /* --- END INCREASED TEXT SIZE --- */
+
 
         .content-list {
             display: flex;
-            flex-direction: column; 
-            align-items: center; 
-            flex-grow: 1; 
-            gap: 1rem; 
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            gap: 1.2rem; /* Slightly increased gap */
         }
 
-        @media (min-width: 768px) { 
+        @media (min-width: 768px) {
             .content-list {
                 flex-direction: row;
                 justify-content: center;
-                align-items: flex-start; 
-                 gap: 2%; 
+                align-items: flex-start;
+                 gap: 3%; /* Slightly increased gap */
             }
         }
 
 
         .list-column {
-            width: 90%; 
-            max-width: 550px; 
+            width: 90%;
+            max-width: 600px; /* Slightly wider max width */
         }
 
         @media (min-width: 768px) {
              .list-column {
-                width: 45%; 
+                width: 46%; /* Slightly increased width */
             }
         }
 
@@ -114,33 +130,18 @@
         .content-item {
             display: flex;
             align-items: center;
-            margin-bottom: clamp(0.8rem, 2vh, 1.2rem); 
-            padding: clamp(0.6rem, 1.5vh, 0.8rem) clamp(1rem, 3vw, 1.5rem); 
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: clamp(1rem, 2.5vh, 1.5rem); /* Increased margin */
+            padding: clamp(0.8rem, 2vh, 1rem) clamp(1.2rem, 3.5vw, 1.8rem); /* Increased padding */
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly less transparent */
+            border-radius: 12px; /* More rounded */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Slightly stronger shadow */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .content-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
         }
-
-        .content-icon {
-            font-size: clamp(1.32rem, 3.45vw, 1.98rem); 
-            margin-left: 1rem;
-            color: #7b0041;
-            flex-shrink: 0;
-        }
-
-        .content-text {
-            font-size: clamp(1.1rem, 2.88vw, 1.54rem); 
-            font-weight: 700;
-            color: #333;
-        }
-
-        
 
         .decoration {
             position: absolute;
@@ -148,9 +149,9 @@
             background: radial-gradient(circle, rgba(248, 213, 126, 0.6) 0%, rgba(248, 213, 126, 0) 70%);
             filter: blur(20px);
             z-index: 1;
-             pointer-events: none; 
+             pointer-events: none;
         }
-    
+
 /* Element Entrance Animations */
 .logos, .main-title, .subtitle, .authors, .footer-prompt, .main-heading, .conclusion, .team-container, .slide-content > *, .content > div:not(.logos):not(.footer-prompt) { /* Add more selectors as needed per slide */
   opacity: 0;
@@ -192,7 +193,7 @@ body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:
         <div class="slide-container">
             <div class="particles-container" id="particles"></div>
 
-            
+
             <div class="decoration"
                 style="top: 10%; right: 10%; width: 200px; height: 200px;"></div>
             <div class="decoration"
@@ -283,94 +284,62 @@ body.animate-in .slide-content > *:nth-child(3), body.animate-in .content > div:
                     </div>
                 </div>
 
-                
-                
+
+
             </div>
         </div>
 
-        <script>
-        
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 30;
+         <script>
+         // Simple particle generation
+         const particlesContainer = document.getElementById('particles');
+         const particleCount = 30;
+         const definedKeyframes = new Set();
 
-        
-        const definedKeyframes = new Set();
+         for (let i = 0; i < particleCount; i++) {
+             const particle = document.createElement('div');
+             particle.classList.add('particle');
+             const size = Math.random() * 4 + 1;
+             particle.style.width = `${size}px`;
+             particle.style.height = `${size}px`;
+             particle.style.left = `${Math.random() * 100}%`;
+             particle.style.top = `${Math.random() * 100}%`;
+             particle.style.opacity = Math.random() * 0.4 + 0.1; // Less opaque
+             const duration = Math.random() * 30 + 15; // Slower animation
+             const delay = Math.random() * 6;
+             const animationName = `float_${i}`;
+             particle.style.animation = `${animationName} ${duration}s ${delay}s infinite linear alternate`; // Alternate direction
+             particlesContainer.appendChild(particle);
 
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-
-            const size = Math.random() * 4 + 1;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-
-            
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-
-            
-            particle.style.opacity = Math.random() * 0.5 + 0.1;
-
-            
-            const duration = Math.random() * 30 + 10;
-            const delay = Math.random() * 5;
-            const animationName = `float_${i}`; 
-
-            particle.style.animation = `${animationName} ${duration}s ${delay}s infinite linear`;
-            particle.style.transform = `translateY(0)`;
-
-            particlesContainer.appendChild(particle);
-
-            
              if (!definedKeyframes.has(animationName)) {
-                const style = document.createElement('style');
-                
-                const x1 = Math.random() * 100 - 50;
-                const y1 = Math.random() * 100 - 50;
-                const x2 = Math.random() * 100 - 50;
-                const y2 = Math.random() * 100 - 50;
-                const x3 = Math.random() * 100 - 50;
-                const y3 = Math.random() * 100 - 50;
+                 const style = document.createElement('style');
+                 const x1 = Math.random() * 80 - 40; // Reduced range
+                 const y1 = Math.random() * 80 - 40;
+                 style.textContent = `
+                     @keyframes ${animationName} {
+                         0% { transform: translate(0, 0); }
+                         100% { transform: translate(${x1}px, ${y1}px); }
+                     }
+                 `;
+                 document.head.appendChild(style);
+                 definedKeyframes.add(animationName);
+             }
+         }
 
-                style.textContent = `
-                    @keyframes ${animationName} {
-                        0% { transform: translate(0, 0); }
-                        25% { transform: translate(${x1}px, ${y1}px); }
-                        50% { transform: translate(${x2}px, ${y2}px); }
-                        75% { transform: translate(${x3}px, ${y3}px); }
-                        100% { transform: translate(0, 0); }
-                    }
-                `;
-                document.head.appendChild(style);
-                definedKeyframes.add(animationName);
-            }
-        }
-    </script>
-    
-<script>
-  window.addEventListener('message', function(event) {
-    // Basic check for security and relevance
-    if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
-      return;
-    }
-    console.log('Slide activated message received in iframe: ' + window.location.pathname);
-    // Add class to body to trigger animations defined in CSS
-    // Remove class first to ensure animation restarts if slide is revisited
-    document.body.classList.remove('animate-in');
-    // Force reflow/repaint might be needed for reliable restart
-    void document.body.offsetWidth;
-    document.body.classList.add('animate-in');
+         // Animation Trigger Logic
+         window.addEventListener('message', function(event) {
+             // Basic check for security and relevance
+             if (event.source !== window.parent || !event.data || event.data.type !== 'slideActivated') {
+                 return;
+             }
 
-  });
+             console.log('Slide activated message RECEIVED in iframe: ' + window.location.pathname);
 
-  // Trigger animation on initial load ONLY if this is the first slide (Untitled-1.html)
-  // Assumes parent frame loads slide 1 as active initially without sending a message.
-  if (window.location.pathname.endsWith('Untitled-1.html')) {
-     document.addEventListener('DOMContentLoaded', () => {
-         console.log('Initial animation for slide 1');
-         document.body.classList.add('animate-in');
-     });
-  }
-</script>
+             document.body.classList.remove('animate-in');
+             void document.body.offsetWidth; // Reflow
+             document.body.classList.add('animate-in');
+             
+             console.log('Added animate-in class to body in:', window.location.pathname);
+         });
+     </script>
 </body>
 </html>
