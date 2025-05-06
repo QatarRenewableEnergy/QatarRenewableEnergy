@@ -44,10 +44,9 @@
             height: 100vh;
             position: relative;
             overflow: hidden;
-            background-color: #000; /* User mentioned black screen, this is the container bg */
+            background-color: #000; 
         }
 
-        /* --- SIMPLE SLIDE TRANSITION --- */
         .slide-iframe {
             position: absolute;
             top: 0;
@@ -55,23 +54,16 @@
             width: 100%;
             height: 100%;
             border: none;
-            /* Initial state is set by JS, but CSS provides transition capability */
-            /* opacity: 0; */ /* Default opacity set by JS */
-            /* transform: translateX(100%); */ /* Default transform set by JS */
             transition: transform var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out;
-            pointer-events: none; /* Initially not interactive, active class changes this */
-            background-color: #fff; /* iframe background, should prevent seeing container bg if opaque */
+            pointer-events: none; 
+            background-color: #fff; 
         }
 
         .slide-iframe.active {
-            /* transform: translateX(0%); */ /* Active transform set by JS */
-            /* opacity: 1; */ /* Active opacity set by JS */
-            z-index: 1; /* Ensure active slide is on top */
+            z-index: 1; 
             pointer-events: auto;
         }
-        /* --- END SIMPLE SLIDE TRANSITION --- */
 
-        /* Back to Site Button */
         .back-to-site {
             position: fixed;
             bottom: 30px;
@@ -99,7 +91,6 @@
             box-shadow: 0 5px 15px var(--shadow-color);
         }
 
-        /* Slide Indicator */
         .slide-indicator-wrapper {
             position: fixed;
             bottom: 30px;
@@ -115,7 +106,6 @@
             direction: ltr;
         }
 
-        /* Progress Bar */
         .progress-bar {
             position: fixed;
             bottom: 0;
@@ -127,7 +117,6 @@
             width: 0%;
         }
 
-        /* Navigation Buttons Container */
         .navigation {
             position: fixed;
             bottom: 30px;
@@ -139,7 +128,6 @@
             direction: ltr;
         }
 
-        /* Individual Navigation Button */
         .nav-btn {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(123, 0, 65, 0.2);
@@ -183,7 +171,6 @@
         <div class="progress-bar" id="slide-progress"></div>
 
         <div class="slides-container">
-            
             <iframe class='slide-iframe' id='slide-iframe-1' src='Untitled-1.html' title='Slide 1'></iframe>
             <iframe class='slide-iframe' id='slide-iframe-2' src='Untitled-2.html' title='Slide 2'></iframe>
             <iframe class='slide-iframe' id='slide-iframe-3' src='Untitled-3.html' title='Slide 3'></iframe>
@@ -220,7 +207,7 @@
             const totalSlideIndicator = document.getElementById("total-slides");
             const progressBar = document.getElementById("slide-progress");
             let isAnimating = false;
-            let transitionDuration = 600; // Default, will be updated from CSS
+            let transitionDuration = 600; 
 
             function sendMessageToIframe(iframe, slideNumber) {
                 if (iframe && iframe.contentWindow) {
@@ -252,36 +239,32 @@
                 const currentIframe = slideIframes[oldSlideIndex];
                 const nextIframe = slideIframes[newSlideIndex];
 
-                // 1. Prepare the NEXT slide (position it correctly off-screen, ready to animate in)
-                nextIframe.style.transition = 'none'; // No transition for this setup
-                if (direction === 1) { // Moving forward, next slide starts from the right
+                nextIframe.style.transition = 'none'; 
+                if (direction === 1) { 
                     nextIframe.style.transform = 'translateX(100%)';
-                } else { // Moving backward, next slide starts from the left
+                } else { 
                     nextIframe.style.transform = 'translateX(-100%)';
                 }
-                nextIframe.style.opacity = '0'; // Explicitly set opacity to 0 before animation
-                nextIframe.classList.remove('active'); // Ensure it's not active yet
-                void nextIframe.offsetWidth; // Force reflow
-                nextIframe.style.transition = ''; // Re-enable CSS transitions (from .slide-iframe class)
+                nextIframe.style.opacity = '0'; 
+                nextIframe.classList.remove('active'); 
+                void nextIframe.offsetWidth; 
+                nextIframe.style.transition = ''; 
 
-                // 2. Animate OUT the CURRENT slide
                 if (currentIframe) {
                     currentIframe.classList.remove('active'); 
-                    if (direction === 1) { // Current slide exits to the left
+                    if (direction === 1) { 
                         currentIframe.style.transform = 'translateX(-100%)';
-                    } else { // Current slide exits to the right
+                    } else { 
                         currentIframe.style.transform = 'translateX(100%)'; 
                     }
-                    // Opacity will transition to 0 based on .slide-iframe style when .active is removed.
                 }
 
-                // 3. Animate IN the NEXT slide
-                setTimeout(() => { // Short delay for setup and to allow 'out' animation to start
-                    nextIframe.style.opacity = '1';         // Target opacity for animation
-                    nextIframe.style.transform = 'translateX(0%)'; // Target transform for animation
-                    nextIframe.classList.add('active');   // Add active class for z-index, pointer-events, and state
+                setTimeout(() => { 
+                    nextIframe.style.opacity = '1';         
+                    nextIframe.style.transform = 'translateX(0%)'; 
+                    nextIframe.classList.add('active');   
                     sendMessageToIframe(nextIframe, newSlideNumber);
-                }, 20); // Adjusted delay to ensure styles apply before transition
+                }, 20); 
 
                 currentSlide = newSlideNumber;
                 currentSlideIndicator.textContent = newSlideNumber;
@@ -292,14 +275,13 @@
                     progressBar.style.width = percentage + "%";
                 }
 
-                // 4. Reset animation flag and clean up old slide's inline styles after transition
                 setTimeout(() => {
                     isAnimating = false;
                     if (currentIframe) {
                         currentIframe.style.transition = 'none';
                         currentIframe.style.opacity = '0'; 
-                        currentIframe.style.transform = 'translateX(100%)'; // Default hidden
-                        currentIframe.classList.remove('active'); // Ensure it's fully reset
+                        currentIframe.style.transform = 'translateX(100%)'; 
+                        currentIframe.classList.remove('active'); 
                         void currentIframe.offsetWidth;
                         currentIframe.style.transition = '';
                     }
@@ -313,13 +295,22 @@
                 }
             }
 
+            // Listen for messages from iframes for navigation
+            window.addEventListener("message", (event) => {
+                if (event.data && event.data.type === "navigateSlide") {
+                    if (!isAnimating) {
+                        changeSlide(event.data.direction);
+                    }
+                }
+            });
+
             document.addEventListener("DOMContentLoaded", () => {
                 totalSlides = slideIframes.length;
                 const durationStr = getComputedStyle(document.documentElement).getPropertyValue('--transition-speed');
                 if (durationStr) {
                     const parsedDuration = parseFloat(durationStr.trim());
                     if (!isNaN(parsedDuration)) {
-                        transitionDuration = parsedDuration * 1000; // Convert s to ms
+                        transitionDuration = parsedDuration * 1000; 
                     }
                 }
                 console.log(`Using transition duration: ${transitionDuration}ms`);
@@ -327,21 +318,38 @@
                 if (totalSlides > 0) {
                     totalSlideIndicator.textContent = totalSlides;
                     slideIframes.forEach((iframe, index) => {
-                        iframe.style.transition = 'none'; // Disable transitions for initial setup
+                        iframe.style.transition = 'none'; 
                         if (index === 0) {
                             iframe.style.opacity = '1';
                             iframe.style.transform = 'translateX(0%)';
                             iframe.classList.add("active");
-                            // pointerEvents is handled by .active class
                             setTimeout(() => sendMessageToIframe(iframe, 1), 200);
                         } else {
                             iframe.style.opacity = '0';
-                            iframe.style.transform = 'translateX(100%)'; // Default hidden position
+                            iframe.style.transform = 'translateX(100%)'; 
                             iframe.classList.remove("active");
-                            // pointerEvents is handled by .slide-iframe (not .active) style
                         }
-                        void iframe.offsetWidth; // Reflow
-                        iframe.style.transition = ''; // Re-enable CSS transitions
+                        void iframe.offsetWidth; 
+                        iframe.style.transition = ''; 
+
+                        // Add keydown listener to each iframe once loaded
+                        iframe.addEventListener('load', () => {
+                            try {
+                                const iframeDoc = iframe.contentWindow.document;
+                                iframeDoc.addEventListener('keydown', (e) => {
+                                    if (e.key === "ArrowRight" || e.key === "PageDown") {
+                                        e.preventDefault(); // Prevent default scroll/action in iframe
+                                        window.parent.postMessage({ type: "navigateSlide", direction: 1 }, "*");
+                                    } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+                                        e.preventDefault(); // Prevent default scroll/action in iframe
+                                        window.parent.postMessage({ type: "navigateSlide", direction: -1 }, "*");
+                                    }
+                                });
+                                console.log(`Added keydown listener to iframe: ${iframe.id || index + 1}`);
+                            } catch (error) {
+                                console.warn(`Could not add keydown listener to iframe ${iframe.id || index + 1}:`, error);
+                            }
+                        });
                     });
 
                     currentSlideIndicator.textContent = 1;
@@ -357,8 +365,15 @@
                     if (progressBar) progressBar.style.width = "0%";
                 }
 
+                // Parent document keydown listener (fallback or for when parent has focus)
                 document.addEventListener("keydown", function(e) {
-                    if (!isAnimating) { // Check isAnimating flag before changing slide
+                    // Check if the event target is an input, textarea, or select to avoid interfering with typing
+                    const targetTagName = e.target.tagName.toLowerCase();
+                    if (targetTagName === 'input' || targetTagName === 'textarea' || targetTagName === 'select') {
+                        return; // Don't navigate if typing in a form field
+                    }
+
+                    if (!isAnimating) { 
                         if (e.key === "ArrowRight" || e.key === "PageDown") {
                             changeSlide(1);
                         } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
